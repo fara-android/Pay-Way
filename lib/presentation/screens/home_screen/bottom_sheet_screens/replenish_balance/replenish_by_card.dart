@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:wallet_ui/presentation/constants/text_style_const.dart' as tc;
 import 'package:wallet_ui/presentation/constants/colors_const.dart' as cc;
-import 'package:wallet_ui/presentation/constants/input_text_formatters.dart' as formatters;
+import 'package:wallet_ui/core/input_text_formatters.dart' as formatters;
 import 'package:wallet_ui/presentation/screens/home_screen/bottom_sheet_screens/replenish_balance/enter_amount_sheet.dart';
 import 'package:wallet_ui/presentation/screens/home_screen/home_screen_widgets/button.dart';
 

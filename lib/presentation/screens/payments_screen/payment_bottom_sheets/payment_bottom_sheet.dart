@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:wallet_ui/contact_class/payment_chek_class.dart';
 import 'package:wallet_ui/presentation/constants/colors_const.dart' as cc;
 import 'package:wallet_ui/presentation/constants/text_style_const.dart' as tc;
-import 'package:wallet_ui/presentation/constants/input_text_formatters.dart' as formatters;
 import 'package:wallet_ui/presentation/screens/home_screen/bottom_sheet_screens/my_modal_bottom_sheet.dart' as mbsh;
 import 'package:wallet_ui/presentation/screens/home_screen/home_screen_widgets/button.dart';
 import 'package:wallet_ui/presentation/screens/payments_screen/payment_bottom_sheets/payment_check_bottom_sheet.dart';

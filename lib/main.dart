@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
-import 'package:wallet_ui/features/presentation/screens/authorization/login_phone_screen.dart';
+import 'package:flutter/services.dart';
+import 'package:wallet_ui/features/presentation/screens/authorization/login_phone/login_phone_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -10,7 +10,17 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Material App',
-      home: LoginPhoneScreen()
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+        splashFactory: NoSplash.splashFactory,
+        appBarTheme: const AppBarTheme(
+          systemOverlayStyle:
+              SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+        ),
+      ),
+      home: LoginPhoneScreen(),
     );
   }
 }
@@ -56,14 +66,14 @@ class MyApp extends StatelessWidget {
 //             if (x?.getBool('isLoggedIn') ?? false) {
 //                 return  MaterialApp(
 //                     title: 'Pay Way',
-//                     theme: ThemeData(
-//                       primarySwatch: Colors.blue,
-//                         appBarTheme: const AppBarTheme(
-//                             systemOverlayStyle: SystemUiOverlayStyle(
-//                                 statusBarColor: Colors.transparent
-//                             )
-//                         )
-//                     ),
+                    // theme: ThemeData(
+                    //   primarySwatch: Colors.blue,
+                    //     appBarTheme: const AppBarTheme(
+                    //         systemOverlayStyle: SystemUiOverlayStyle(
+                    //             statusBarColor: Colors.transparent
+                    //         )
+                    //     )
+                    // ),
 //                     home: const MainScreen()
 //                 );
 //             }
