@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:wallet_ui/features/presentation/screens/authorization/splash/splash_screen.dart';
+import 'package:wallet_ui/features/presentation/screens/main/main_screen/main_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
