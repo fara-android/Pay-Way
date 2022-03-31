@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screen_lock/flutter_screen_lock.dart';
+import 'package:local_auth/auth_strings.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wallet_ui/core/styles.dart';
@@ -22,6 +23,7 @@ class LoginBiometricsScreen extends StatefulWidget {
 
 class _LoginBiometricsScreenState extends State<LoginBiometricsScreen> {
   late LocalAuthentication localAuth;
+  List<BiometricType> availableBiometrics = [];
 
   @override
   void initState() {
@@ -103,23 +105,31 @@ class _LoginBiometricsScreenState extends State<LoginBiometricsScreen> {
   }
 
   void authenticate() async {
-    final _canCheckBio = await canCheckBiometrics();
-    if (_canCheckBio) {
-      final successAuthentication = await localAuth.authenticate(
-        localizedReason: 'Подтвердите биометрические данные для входа',
-        biometricOnly: true,
-        useErrorDialogs: false,
-        stickyAuth: true,
-      );
-      if (successAuthentication) {
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-            builder: (context) => MainScreen(),
+    try {
+      final _canCheckBio = await canCheckBiometrics();
+      if (_canCheckBio) {
+        final successAuthentication = await localAuth.authenticate(
+          localizedReason: 'Подтвердите биометрические данные для входа',
+          androidAuthStrings: AndroidAuthMessages(
+            biometricRequiredTitle: '',
+            biometricHint: '',
+            signInTitle: '  ',
+            cancelButton: 'Отменить',
           ),
-          (route) => false,
+          biometricOnly: true,
+          useErrorDialogs: false,
+          stickyAuth: true,
         );
+        if (successAuthentication) {
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) => MainScreen(),
+            ),
+            (route) => false,
+          );
+        }
       }
-    }
+    } on Object catch (e) {}
   }
 }
