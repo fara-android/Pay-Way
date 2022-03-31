@@ -23,6 +23,7 @@ dependencies:
   shared_preferences: ^2.0.13
   local_auth: ^1.1.11
   flutter_screen_lock: ^5.0.6+1
+  
 
 dev_dependencies:
   flutter_test:
