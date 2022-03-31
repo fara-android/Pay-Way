@@ -1,5 +1,3 @@
-
-
 part of '../code_phone_screen.dart';
 
 class CodePhoneForm extends StatefulWidget {
@@ -10,7 +8,7 @@ class CodePhoneForm extends StatefulWidget {
 }
 
 class _CodePhoneFormState extends State<CodePhoneForm> {
-  ValueNotifier<String> phoneNumberText = ValueNotifier('');
+  ValueNotifier<String> codeText = ValueNotifier('');
   late FocusNode focusNode;
 
   @override
@@ -25,7 +23,6 @@ class _CodePhoneFormState extends State<CodePhoneForm> {
     focusNode.unfocus();
     super.dispose();
   }
-  
 
   @override
   Widget build(BuildContext context) {
@@ -52,24 +49,25 @@ class _CodePhoneFormState extends State<CodePhoneForm> {
           focusNode: focusNode,
           textInputType: TextInputType.phone,
           inputFormatters: [formatters.pinFormatter],
-          onChange: (text) {},
-          obscureeText: true,
+          onChange: (text) => codeText.value = text,
         ),
         SizedBox(height: 16),
         Spacer(),
-        CustomButton(
-          text: "Далее",
-          isDisabled: false,
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => FaceIdPhoneScreen(),
-              ),
-            );
-          },
-          backgroundColor: Styles.brandBlue,
-        ),
+        ValueListenableBuilder(
+            valueListenable: codeText,
+            builder: (context, str, _) {
+              return CustomButton(
+                text: "Далее",
+                isDisabled: codeText.value.length != 4,
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LoginPinScreen(),
+                  ),
+                ),
+                backgroundColor: Styles.brandBlue,
+              );
+            }),
         SizedBox(height: 32),
       ],
     );

@@ -1,85 +1,7 @@
 part of '../login_phone_screen.dart';
 
-// class LoginPhoneForm extends StatefulWidget {
-//   LoginPhoneForm({Key? key}) : super(key: key);
-
-//   @override
-//   State<LoginPhoneForm> createState() => _LoginPhoneFormState();
-// }
-
-// class _LoginPhoneFormState extends State<LoginPhoneForm> {
-// ValueNotifier<String> phoneNumberText = ValueNotifier('');
-// late FocusNode focusNode;
-
-// @override
-// void initState() {
-//   focusNode = FocusNode();
-//   focusNode.requestFocus();
-//   super.initState();
-// }
-
-// @override
-// void dispose() {
-//   focusNode.unfocus();
-//   super.dispose();
-// }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       height: Styles.getHeight(context),
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           Spacer(),
-// Text(
-//   "Войти",
-//   style: Styles.ts32(
-//     Styles.textColor,
-//     fontWeight: FontWeight.w700,
-//   ),
-// ),
-// SizedBox(height: 40),
-// Text(
-//   "ВАШ НОМЕР ТЕЛЕФОНА",
-//   style: Styles.ts12(Styles.textColor2, fontWeight: FontWeight.w400),
-// ),
-
-//           // SizedBox(height: 16),
-// CustomTextField(
-//   hintText: "+996(XXX) XXX XXX",
-//   // focusNode: focusNode,
-//   textInputType: TextInputType.phone,
-//   inputFormatters: [formatters.phoneNumberFormatter],
-//   onChange: (text) => phoneNumberText.value = text,
-// ),
-//           SizedBox(height: 16),
-//           ValueListenableBuilder(
-//             valueListenable: phoneNumberText,
-//             builder: (context, str, _) {
-// return CustomButton(
-//   text: "Далее",
-//   isDisabled: phoneNumberText.value.length != 18,
-//   onPressed: () {
-//     // Navigator.push(
-//     //   context,
-//     //   MaterialPageRoute(
-//     //     builder: (context) => PublicationsScreen(),
-//     //   ),
-//     // );
-//   },
-//   backgroundColor: Styles.brandBlue,
-// );
-//             },
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
 class LoginPhoneForm extends StatefulWidget {
-  const LoginPhoneForm();
+  LoginPhoneForm({Key? key}) : super(key: key);
 
   @override
   State<LoginPhoneForm> createState() => _LoginPhoneFormState();
@@ -87,20 +9,6 @@ class LoginPhoneForm extends StatefulWidget {
 
 class _LoginPhoneFormState extends State<LoginPhoneForm> {
   ValueNotifier<String> phoneNumberText = ValueNotifier('');
-  late FocusNode focusNode;
-
-  @override
-  void initState() {
-    focusNode = FocusNode();
-    focusNode.requestFocus();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    focusNode.unfocus();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -124,27 +32,27 @@ class _LoginPhoneFormState extends State<LoginPhoneForm> {
         ),
         CustomTextField(
           hintText: "+996(XXX) XXX XXX",
-          focusNode: focusNode,
           textInputType: TextInputType.phone,
           inputFormatters: [formatters.phoneNumberFormatter],
-          onChange: (text) {},
+          onChange: (text) => phoneNumberText.value = text,
         ),
         SizedBox(height: 16),
         Spacer(),
-        CustomButton(
-          text: "Далее",
-          // isDisabled: phoneNumberText.value.length != 18,
-          isDisabled: false,
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => LoginCodeScreen(),
-              ),
-            );
-          },
-          backgroundColor: Styles.brandBlue,
-        ),
+        ValueListenableBuilder(
+            valueListenable: phoneNumberText,
+            builder: (context, str, _) {
+              return CustomButton(
+                text: "Далее",
+                isDisabled: phoneNumberText.value.length != 18,
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LoginCodeScreen(),
+                  ),
+                ),
+                backgroundColor: Styles.brandBlue,
+              );
+            }),
         SizedBox(height: 32),
       ],
     );

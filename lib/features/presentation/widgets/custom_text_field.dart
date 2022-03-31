@@ -36,36 +36,30 @@ class CustomTextField extends StatefulWidget {
 class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(height: 8),
-        TextFormField(
-          style: Styles.ts16(Styles.textColor),
-          obscureText: widget.obscureeText,
-          focusNode: widget.focusNode,
-          keyboardType: widget.textInputType,
-          controller: widget.controller,
-          cursorColor: Styles.textColor,
-          inputFormatters: widget.inputFormatters,
-          decoration: InputDecoration(
-            prefixIcon: widget.icon,
-            hintText: widget.hintText,
-            hintStyle: TextStyle(color: Colors.white),
-            fillColor: widget.fillColor,
-            filled: widget.filled,
-            enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Styles.textColor)),
-            border: UnderlineInputBorder(
-                borderSide: BorderSide(color: Styles.textColor)),
-            focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Styles.textColor)),
-          ),
-          onChanged: widget.onChange != null
-              ? (text) => setState(() => widget.onChange!(text))
-              : null,
-        )
-      ],
+    return TextFormField(
+      style: Styles.ts16(Styles.textColor),
+      obscureText: widget.obscureeText,
+      focusNode: widget.focusNode,
+      keyboardType: widget.textInputType,
+      controller: widget.controller,
+      cursorColor: Styles.textColor,
+      inputFormatters: widget.inputFormatters,
+      decoration: InputDecoration(
+        prefixIcon: widget.icon,
+        hintText: widget.hintText,
+        hintStyle: TextStyle(color: Colors.grey),
+        fillColor: widget.fillColor,
+        filled: widget.filled,
+        enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Styles.textColor)),
+        border: UnderlineInputBorder(
+            borderSide: BorderSide(color: Styles.textColor)),
+        focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Styles.textColor)),
+      ),
+      onChanged: widget.onChange != null
+          ? (text) => setState(() => widget.onChange!(text))
+          : null,
     );
   }
 }

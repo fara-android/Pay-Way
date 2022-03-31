@@ -19,7 +19,6 @@ class LoginPhoneScreen extends StatelessWidget {
         onTap: () => FocusScope.of(context).unfocus(),
         child: SafeArea(
           child: Container(
-            height: Styles.getHeight(context),
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: LoginPhoneForm(),
           ),
