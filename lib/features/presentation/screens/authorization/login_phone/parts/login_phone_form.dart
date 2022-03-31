@@ -9,6 +9,20 @@ class LoginPhoneForm extends StatefulWidget {
 
 class _LoginPhoneFormState extends State<LoginPhoneForm> {
   ValueNotifier<String> phoneNumberText = ValueNotifier('');
+  late FocusNode focusNode;
+
+  @override
+  void initState() {
+    focusNode = FocusNode();
+    focusNode.requestFocus();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    focusNode.unfocus();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +46,7 @@ class _LoginPhoneFormState extends State<LoginPhoneForm> {
         ),
         CustomTextField(
           hintText: "+996(XXX) XXX XXX",
+          focusNode: focusNode,
           textInputType: TextInputType.phone,
           inputFormatters: [formatters.phoneNumberFormatter],
           onChange: (text) => phoneNumberText.value = text,
