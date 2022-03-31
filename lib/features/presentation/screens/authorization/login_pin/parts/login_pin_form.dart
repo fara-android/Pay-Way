@@ -11,11 +11,15 @@ class _LoginPinFormState extends State<LoginPinForm> {
   ValueNotifier<String> pinText = ValueNotifier('');
   ValueNotifier<bool> useBiometrics = ValueNotifier(false);
   late FocusNode focusNode;
+  late LocalAuthentication localAuth;
 
   @override
   void initState() {
     focusNode = FocusNode();
     focusNode.requestFocus();
+    localAuth = LocalAuthentication();
+    canCheckBiometrics();
+
     super.initState();
   }
 
@@ -65,13 +69,14 @@ class _LoginPinFormState extends State<LoginPinForm> {
             return CustomButton(
               text: "Войти",
               isDisabled: pinText.value.length != 4,
-              onPressed: () => Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => MainScreen(),
-                ),
-                (route) => false,
-              ),
+              onPressed: () => authenticate(),
+              //   onPressed: () => Navigator.pushAndRemoveUntil(
+              //     context,
+              //     MaterialPageRoute(
+              //       builder: (context) => MainScreen(),
+              //     ),
+              //     (route) => false,
+              //   ),
               backgroundColor: Styles.brandBlue,
             );
           },
@@ -98,7 +103,9 @@ class _LoginPinFormState extends State<LoginPinForm> {
                     inactiveThumbColor: Styles.brandBlue,
                     activeColor: Styles.white,
                     activeTrackColor: Styles.brandBlue,
-                    onChanged: (value) => useBiometrics.value = value,
+                    onChanged: (value) async {
+                      useBiometrics.value = value;
+                    },
                   );
                 },
               )
@@ -107,5 +114,22 @@ class _LoginPinFormState extends State<LoginPinForm> {
         ),
       ],
     );
+  }
+
+  Future<bool> canCheckBiometrics() async {
+    bool canCheckBiometrics = await localAuth.canCheckBiometrics;
+    return canCheckBiometrics;
+  }
+
+  void authenticate() async {
+    final _canCheckBio = await canCheckBiometrics();
+    if (_canCheckBio) {
+      final successAuthentication = await localAuth.authenticate(
+        localizedReason: 'Подтвердите биометрические данные для входа',
+        biometricOnly: true,
+        useErrorDialogs: false,
+        stickyAuth: true,
+      );
+    }
   }
 }
