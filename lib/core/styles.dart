@@ -18,6 +18,7 @@ class Styles {
   static const Color textColor2 = Color(0xffBDBDBD);
   static const Color inActiveColor = Color(0xFFCFCFCF);
   static const Color backgroundColor = Color(0xff011D29);
+  static const Color backgroundColor2 = Color(0xff0062CC);
 
   // sizes
 
