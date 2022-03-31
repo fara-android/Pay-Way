@@ -18,7 +18,6 @@ class _LoginPinFormState extends State<LoginPinForm> {
     focusNode = FocusNode();
     focusNode.requestFocus();
     localAuth = LocalAuthentication();
-    canCheckBiometrics();
 
     super.initState();
   }
@@ -66,18 +65,36 @@ class _LoginPinFormState extends State<LoginPinForm> {
         ValueListenableBuilder(
           valueListenable: pinText,
           builder: (context, str, _) {
-            return CustomButton(
-              text: "Войти",
-              isDisabled: pinText.value.length != 4,
-              onPressed: () => authenticate(),
-              //   onPressed: () => Navigator.pushAndRemoveUntil(
-              //     context,
-              //     MaterialPageRoute(
-              //       builder: (context) => MainScreen(),
-              //     ),
-              //     (route) => false,
-              //   ),
-              backgroundColor: Styles.brandBlue,
+            return BlocConsumer<LoginPinCubit, LoginPinState>(
+              listener: (context, state) {
+                state.maybeWhen(
+                  orElse: () {},
+                  success: () {
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MainScreen(),
+                      ),
+                      (route) => false,
+                    );
+                  },
+                  failed: () {
+                    // TODO
+                  },
+                );
+              },
+              builder: (context, state) {
+                return CustomButton(
+                  text: "Войти",
+                  isDisabled: pinText.value.length != 4,
+                  onPressed: () =>
+                      BlocProvider.of<LoginPinCubit>(context).savePinCode(
+                    pinCode: pinText.value,
+                    useAutenthication: useBiometrics.value,
+                  ),
+                  backgroundColor: Styles.brandBlue,
+                );
+              },
             );
           },
         ),
@@ -114,22 +131,5 @@ class _LoginPinFormState extends State<LoginPinForm> {
         ),
       ],
     );
-  }
-
-  Future<bool> canCheckBiometrics() async {
-    bool canCheckBiometrics = await localAuth.canCheckBiometrics;
-    return canCheckBiometrics;
-  }
-
-  void authenticate() async {
-    final _canCheckBio = await canCheckBiometrics();
-    if (_canCheckBio) {
-      final successAuthentication = await localAuth.authenticate(
-        localizedReason: 'Подтвердите биометрические данные для входа',
-        biometricOnly: true,
-        useErrorDialogs: false,
-        stickyAuth: true,
-      );
-    }
   }
 }

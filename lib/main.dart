@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:wallet_ui/features/presentation/screens/authorization/splash/splash_screen.dart';
+import 'package:wallet_ui/features/presentation/screens/splash/splash_screen.dart';
+import 'package:wallet_ui/service_locator.dart' as di;
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await di.init();
   runApp(MyApp());
 }
 
