@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:wallet_ui/features/presentation/screens/authorization/login_phone/login_phone_screen.dart';
+import 'package:wallet_ui/features/presentation/screens/authorization/splash/splash_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
               SystemUiOverlayStyle(statusBarColor: Colors.transparent),
         ),
       ),
-      home: LoginPhoneScreen(),
+      home: SplashScreen(),
     );
   }
 }
