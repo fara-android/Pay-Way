@@ -15,7 +15,6 @@ class MainScreen extends StatelessWidget {
       backgroundColor: Styles.backgroundColor2,
       body: SafeArea(
         child: Column(
-          mainAxisSize: MainAxisSize.max,
           children: [
             Container(
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 22),

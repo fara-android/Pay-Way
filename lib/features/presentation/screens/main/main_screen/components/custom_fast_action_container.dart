@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wallet_ui/core/styles.dart';
+import 'package:wallet_ui/features/presentation/widgets/scale_animated_container.dart';
 
 class CustomFastActionContainer extends StatelessWidget {
   final String text;
@@ -11,12 +12,14 @@ class CustomFastActionContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          width: 56,
-          height: 56,
-          decoration: BoxDecoration(
-              color: Styles.textColor, borderRadius: BorderRadius.circular(16)),
-          child: icon,
+        ScaleAnimationContainer(
+          child: Container(
+            width: 56,
+            height: 56,
+            decoration: BoxDecoration(
+                color: Styles.textColor, borderRadius: BorderRadius.circular(16)),
+            child: icon,
+          ),
         ),
         SizedBox(height: 8),
         Text(

@@ -3,6 +3,7 @@ import 'package:local_auth/local_auth.dart';
 import 'package:wallet_ui/core/styles.dart';
 import 'package:wallet_ui/features/presentation/cubits/auth/login_pin_cubit/login_pin_cubit.dart';
 import 'package:wallet_ui/features/presentation/screens/main/main_screen/main_screen.dart';
+import 'package:wallet_ui/features/presentation/screens/menu/menu.dart';
 import 'package:wallet_ui/features/presentation/widgets/app_logo.dart';
 import 'package:wallet_ui/features/presentation/widgets/custom_button.dart';
 import 'package:wallet_ui/features/presentation/widgets/custom_text_field.dart';

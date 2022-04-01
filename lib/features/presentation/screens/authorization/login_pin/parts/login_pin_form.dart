@@ -73,7 +73,7 @@ class _LoginPinFormState extends State<LoginPinForm> {
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => MainScreen(),
+                        builder: (context) => Menu(),
                       ),
                       (route) => false,
                     );
