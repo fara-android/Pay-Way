@@ -5,6 +5,7 @@ import 'package:wallet_ui/features/presentation/screens/main/main_screen/compone
 import 'package:wallet_ui/features/presentation/screens/main/main_screen/components/favorites_custom_banner_container.dart';
 import 'package:wallet_ui/features/presentation/screens/main/main_screen/components/favorites_custom_circle_avatar.dart';
 import 'package:wallet_ui/features/presentation/screens/main/main_screen/components/custom_fast_action_container.dart';
+import 'package:wallet_ui/features/presentation/screens/main/search_screen.dart/search_screen.dart';
 import 'package:wallet_ui/features/presentation/widgets/custom_button.dart';
 import 'package:wallet_ui/features/presentation/widgets/scale_animated_container.dart';
 
