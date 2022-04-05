@@ -16,11 +16,20 @@ class Balance extends StatelessWidget {
                 color: Styles.textColor),
           ),
           TextSpan(
-            text: '44 С',
+            text: '44 ',
             style: TextStyle(
                 fontSize: 48,
                 fontWeight: FontWeight.w100,
                 color: Styles.textColor),
+          ),
+          TextSpan(
+            text: 'С',
+            style: TextStyle(
+              fontSize: 48,
+              fontWeight: FontWeight.w100,
+              color: Styles.textColor,
+              decoration: TextDecoration.underline,
+            ),
           ),
         ],
       ),

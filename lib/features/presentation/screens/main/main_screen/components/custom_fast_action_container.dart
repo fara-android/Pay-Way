@@ -5,19 +5,26 @@ import 'package:wallet_ui/features/presentation/widgets/scale_animated_container
 class CustomFastActionContainer extends StatelessWidget {
   final String text;
   final Icon icon;
-  const CustomFastActionContainer({Key? key, required this.text, required this.icon})
-      : super(key: key);
+  final Function() onTap;
+  const CustomFastActionContainer({
+    Key? key,
+    required this.text,
+    required this.icon,
+    required this.onTap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         ScaleAnimationContainer(
+          onPressed: onTap,
           child: Container(
             width: 56,
             height: 56,
             decoration: BoxDecoration(
-                color: Styles.textColor, borderRadius: BorderRadius.circular(16)),
+                color: Styles.textColor,
+                borderRadius: BorderRadius.circular(16)),
             child: icon,
           ),
         ),

@@ -12,7 +12,7 @@ class Menu extends StatefulWidget {
 class _MenuState extends State<Menu> {
   var currentIndex = 0;
   var screens = [
-    MainScreen(), //главная
+    MainScreen(),
     MainScreen(),
     MainScreen(),
     MainScreen(),
@@ -36,7 +36,7 @@ class _MenuState extends State<Menu> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.balance,
+              Icons.account_balance_wallet_rounded,
             ),
             label: "Платежи",
             backgroundColor: Styles.backgroundColor,
@@ -58,9 +58,7 @@ class _MenuState extends State<Menu> {
         ],
         onTap: (index) {
           setState(
-            () {
-              currentIndex = index;
-            },
+            () => currentIndex = index,
           );
         },
       ),

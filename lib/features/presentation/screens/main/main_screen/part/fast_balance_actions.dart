@@ -11,14 +11,17 @@ class FastBalanceactions extends StatelessWidget {
         CustomFastActionContainer(
           text: "Пополнить",
           icon: Icon(Icons.add, color: Styles.backgroundColor2),
+          onTap: () {},
         ),
         CustomFastActionContainer(
           text: "Перевести",
           icon: Icon(Icons.arrow_forward_ios, color: Styles.backgroundColor2),
+          onTap: () {},
         ),
         CustomFastActionContainer(
           text: "Перевести",
           icon: Icon(Icons.person_outline, color: Styles.backgroundColor2),
+          onTap: () {},
         )
       ],
     );

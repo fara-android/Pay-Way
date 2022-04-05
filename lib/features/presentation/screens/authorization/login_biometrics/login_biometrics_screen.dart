@@ -90,12 +90,13 @@ class _LoginBiometricsScreenState extends State<LoginBiometricsScreen> {
                 highlightColor: Colors.transparent,
                 onTap: () {},
               ),
-        didUnlocked: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => Menu(),
+        didUnlocked: () => Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) => Menu(),
+            ),
+            (route) => false,
           ),
-        ),
       ),
     );
   }
