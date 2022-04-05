@@ -23,7 +23,7 @@ class FavoritesCustomCircleAvatar extends StatelessWidget {
             child: ScaleAnimationContainer(
               child: CircleAvatar(
                 radius: 28,
-                backgroundColor: Styles.IconColor,
+                backgroundColor: Styles.iconColor,
                 child: Text(
                   fullname,
                   style: TextStyle(color: Styles.textColor, fontSize: 20),

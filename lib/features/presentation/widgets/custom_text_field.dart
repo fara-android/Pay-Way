@@ -14,6 +14,9 @@ class CustomTextField extends StatefulWidget {
   final TextInputType? textInputType;
   final bool obscureeText;
   final FocusNode? focusNode;
+  final double underlineWidth;
+  final bool enabled;
+
   const CustomTextField({
     Key? key,
     this.hintText,
@@ -27,6 +30,8 @@ class CustomTextField extends StatefulWidget {
     this.borderColor = Styles.textColor,
     this.textInputType,
     this.obscureeText = false,
+    this.underlineWidth = 1.0,
+    this.enabled = true,
   }) : super(key: key);
 
   @override
@@ -43,6 +48,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       keyboardType: widget.textInputType,
       controller: widget.controller,
       cursorColor: Styles.textColor,
+      enabled: widget.enabled,
       inputFormatters: widget.inputFormatters,
       decoration: InputDecoration(
         prefixIcon: widget.icon,
@@ -51,11 +57,20 @@ class _CustomTextFieldState extends State<CustomTextField> {
         fillColor: widget.fillColor,
         filled: widget.filled,
         enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Styles.textColor)),
+            borderSide: BorderSide(
+          color: Styles.textColor,
+          width: widget.underlineWidth,
+        )),
         border: UnderlineInputBorder(
-            borderSide: BorderSide(color: Styles.textColor)),
+            borderSide: BorderSide(
+          color: Styles.textColor,
+          width: widget.underlineWidth,
+        )),
         focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Styles.textColor)),
+            borderSide: BorderSide(
+          color: Styles.textColor,
+          width: widget.underlineWidth,
+        )),
       ),
       onChanged: widget.onChange != null
           ? (text) => setState(() => widget.onChange!(text))

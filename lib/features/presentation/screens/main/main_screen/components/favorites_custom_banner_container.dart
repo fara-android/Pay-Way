@@ -12,7 +12,7 @@ class FavoritesCustomBannerContainer extends StatelessWidget {
     return ScaleAnimationContainer(
       child: Container(
         decoration: BoxDecoration(
-            color: Styles.IconColor, borderRadius: BorderRadius.circular(14)),
+            color: Styles.iconColor, borderRadius: BorderRadius.circular(14)),
         width: 311,
         height: 72,
         child: Center(
