@@ -25,7 +25,7 @@ class _MenuState extends State<Menu> {
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Styles.textColor,
         currentIndex: currentIndex,
-        unselectedIconTheme: IconThemeData(color: Styles.IconColor),
+        unselectedIconTheme: IconThemeData(color: Styles.iconColor),
         items: [
           BottomNavigationBarItem(
             icon: Icon(

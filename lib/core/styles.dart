@@ -19,7 +19,7 @@ class Styles {
   static const Color inActiveColor = Color(0xFFCFCFCF);
   static const Color backgroundColor = Color(0xff011D29);
   static const Color backgroundColor2 = Color(0xff0062CC);
-  static const Color IconColor = Color(0xff113D6B);
+  static const Color iconColor = Color(0xff113D6B);
 
   // sizes
 
@@ -89,7 +89,7 @@ class Styles {
           fontWeight: fontWeight,
           decoration: textDecoration,
           fontFamily: fontFamily);
-          static TextStyle ts12(Color color,
+  static TextStyle ts12(Color color,
           {FontWeight? fontWeight,
           TextDecoration? textDecoration,
           String fontFamily = 'MontserratRegular'}) =>

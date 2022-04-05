@@ -91,11 +91,11 @@ class _MyProfileBottomSheet extends StatelessWidget {
             style: TextStyle(fontSize: 24, color: Styles.textColor),
           ),
           SizedBox(height: 30),
-          CustomProfileinfoField(),
-          CustomProfileinfoField(),
-          CustomProfileinfoField(),
-          CustomProfileinfoField(),
-          CustomProfileinfoField(),
+          // CustomProfileinfoField(),
+          // CustomProfileinfoField(),
+          // CustomProfileinfoField(),
+          // CustomProfileinfoField(),
+          // CustomProfileinfoField(),
           Row(
             children: [
               CircleAvatar(
