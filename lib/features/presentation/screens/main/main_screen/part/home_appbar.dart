@@ -57,11 +57,11 @@ class _MyProfileBottomSheet extends StatelessWidget {
             topLeft: Radius.circular(12), topRight: Radius.circular(12)),
         color: Styles.backgroundColor,
       ),
-      padding: EdgeInsets.symmetric(horizontal: 16),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
+      padding: EdgeInsets.all(16),
+      margin: EdgeInsets.only(top: 64),
+      child: ListView(
+        physics: ClampingScrollPhysics(),
         children: [
-          SizedBox(height: 8),
           Align(
             alignment: Alignment.centerRight,
             child: InkWell(
@@ -91,11 +91,31 @@ class _MyProfileBottomSheet extends StatelessWidget {
             style: TextStyle(fontSize: 24, color: Styles.textColor),
           ),
           SizedBox(height: 30),
-          // CustomProfileinfoField(),
-          // CustomProfileinfoField(),
-          // CustomProfileinfoField(),
-          // CustomProfileinfoField(),
-          // CustomProfileinfoField(),
+          CustomProfileinfoField(
+            title: 'Почта',
+            enabled: true,
+          ),
+          SizedBox(height: 16),
+          CustomProfileinfoField(
+            title: 'Телефон',
+            defaultValue: '+996 (501) 331 113',
+          ),
+          SizedBox(height: 16),
+          CustomProfileinfoField(
+            title: 'Ваше имя',
+            defaultValue: 'Иван',
+          ),
+          SizedBox(height: 16),
+          CustomProfileinfoField(
+            title: 'Ваша фамилия',
+            defaultValue: 'Иванов',
+          ),
+          SizedBox(height: 16),
+          CustomProfileinfoField(
+            title: 'ID клиента',
+            defaultValue: '04110',
+          ),
+          SizedBox(height: 30),
           Row(
             children: [
               CircleAvatar(
@@ -109,7 +129,7 @@ class _MyProfileBottomSheet extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 18),
+          SizedBox(height: 32),
           CustomButton(
             text: "Сохранить",
             onPressed: () {},
