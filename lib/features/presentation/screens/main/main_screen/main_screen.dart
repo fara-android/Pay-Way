@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wallet_ui/core/styles.dart';
 import 'package:wallet_ui/features/presentation/screens/main/main_screen/components/custom_finance_container.dart';
+import 'package:wallet_ui/features/presentation/screens/main/main_screen/components/custom_message_container.dart';
 import 'package:wallet_ui/features/presentation/screens/main/main_screen/components/custom_profile_info_field.dart';
 import 'package:wallet_ui/features/presentation/screens/main/main_screen/components/favorites_custom_banner_container.dart';
 import 'package:wallet_ui/features/presentation/screens/main/main_screen/components/favorites_custom_circle_avatar.dart';

@@ -40,7 +40,16 @@ class HomeAppBar extends StatelessWidget {
         SizedBox(width: 22),
         Icon(Icons.web, color: Styles.textColor),
         SizedBox(width: 22),
-        Icon(Icons.notifications_none_outlined, color: Styles.textColor)
+        InkWell(
+            onTap: () => showModalBottomSheet(
+                backgroundColor: Colors.transparent,
+                isScrollControlled: true,
+                context: context,
+                builder: (context) {
+                  return _MessagesBottomSheet();
+                }),
+            child: Icon(Icons.notifications_none_outlined,
+                color: Styles.textColor))
       ],
     );
   }
@@ -116,6 +125,63 @@ class _MyProfileBottomSheet extends StatelessWidget {
             backgroundColor: Styles.backgroundColor2,
           ),
           SizedBox(height: 16)
+        ],
+      ),
+    );
+  }
+}
+
+class _MessagesBottomSheet extends StatelessWidget {
+  _MessagesBottomSheet({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(12), topRight: Radius.circular(12)),
+        color: Styles.backgroundColor,
+      ),
+      padding: EdgeInsets.symmetric(horizontal: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(height: 8),
+          Align(
+            alignment: Alignment.centerRight,
+            child: InkWell(
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+              child: Icon(
+                Icons.close,
+                color: Styles.backgroundColor2,
+              ),
+            ),
+          ),
+          SizedBox(height: 14),
+          Text(
+            "Уведомления",
+            style: TextStyle(
+                fontSize: 24,
+                color: Styles.textColor,
+                fontWeight: FontWeight.w700),
+          ),
+          SizedBox(height: 48),
+          Text(
+            "30 ноября",
+            style: TextStyle(color: Color(0xffBDBDBD)),
+          ),
+          SizedBox(height: 16),
+          ListView.builder(
+            // scrollDirection: Axis.horizontal,
+            shrinkWrap: true,
+            itemCount: 5,
+            itemBuilder: (BuildContext context, int index) {
+              return CustomMessageContainer();
+            },
+          ),
         ],
       ),
     );
