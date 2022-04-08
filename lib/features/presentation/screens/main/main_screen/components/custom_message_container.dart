@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:wallet_ui/core/styles.dart';
 
-class CustomMessageContainer extends StatelessWidget {
-  const CustomMessageContainer({Key? key}) : super(key: key);
+class CustomNotificationsContainer extends StatelessWidget {
+  const CustomNotificationsContainer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
