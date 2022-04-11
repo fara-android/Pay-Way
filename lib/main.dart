@@ -8,15 +8,15 @@ import 'package:wallet_ui/service_locator.dart' as di;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    name: 'PayWay',
-    options: FirebaseOptions(
-      storageBucket: 'kg.atlas.payway',
-      apiKey: 'AIzaSyDG2_9Dh2lr5d9itK_edtEEyi96_scg9d0',
-      appId: '1:16910142796:android:8f5e9dec973a9a1ccc13e9',
-      messagingSenderId: '16910142796',
-      projectId: 'payway-dc274',
-    ),
-  );
+      // name: 'PayWay',
+      // options: FirebaseOptions(
+      //   storageBucket: 'kg.atlas.payway',
+      //   apiKey: 'AIzaSyDG2_9Dh2lr5d9itK_edtEEyi96_scg9d0',
+      //   appId: '1:16910142796:android:8f5e9dec973a9a1ccc13e9',
+      //   messagingSenderId: '16910142796',
+      //   projectId: 'payway-dc274',
+      // ),
+      );
 
   await di.init();
   runApp(MyApp());

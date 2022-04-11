@@ -50,7 +50,7 @@ class _CodePhoneFormState extends State<CodePhoneForm> {
           style: Styles.ts12(Styles.textColor2, fontWeight: FontWeight.w400),
         ),
         CustomTextField(
-          hintText: "xxxx",
+          hintText: "xxxxxx",
           focusNode: focusNode,
           textInputType: TextInputType.phone,
           inputFormatters: [formatters.pinFormatter],
@@ -75,7 +75,7 @@ class _CodePhoneFormState extends State<CodePhoneForm> {
 
   void verifyOTP() async {
     PhoneAuthCredential credential = PhoneAuthProvider.credential(
-        verificationId: widget.verificationId, smsCode: '322074');
+        verificationId: widget.verificationId, smsCode: codeText.value);
 
     await firebaseAuth.signInWithCredential(credential).whenComplete(
       () {

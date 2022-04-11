@@ -61,7 +61,6 @@ class _LoginPhoneFormState extends State<LoginPhoneForm> {
                 text: "Далее",
                 isDisabled: phoneNumberText.value.length != 18,
                 onPressed: () {
-                  // print(phoneNumberText.value.replaceAll('(,)', ''));
                   verifyPhoneNumber(context);
                 },
                 backgroundColor: Styles.brandBlue,
@@ -74,7 +73,10 @@ class _LoginPhoneFormState extends State<LoginPhoneForm> {
 
   void verifyPhoneNumber(BuildContext context) {
     firebaseAuth.verifyPhoneNumber(
-      phoneNumber: '+996555505708',
+      phoneNumber: phoneNumberText.value
+          .replaceAll('(', '')
+          .replaceAll(')', '')
+          .replaceAll(' ', ''),
       verificationCompleted: (credential) async {
         await firebaseAuth.signInWithCredential(credential).then((value) {
           print('success');
