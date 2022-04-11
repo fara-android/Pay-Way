@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "16910142796",
+    "project_id": "payway-dc274",
+    "storage_bucket": "payway-dc274.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:16910142796:android:8f5e9dec973a9a1ccc13e9",
+        "android_client_info": {
+          "package_name": "kg.atlas.payway"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "16910142796-40sd457hke8pa6ktjql3dlddcks6kkml.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kg.atlas.payway",
+            "certificate_hash": "5ea744acef3963d2c3b3081b2a5bd79c0cf4f027"
+          }
+        },
+        {
+          "client_id": "16910142796-d9mvdci00g47qsfcsmu5b8mvv266rkrm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDG2_9Dh2lr5d9itK_edtEEyi96_scg9d0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "16910142796-d9mvdci00g47qsfcsmu5b8mvv266rkrm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

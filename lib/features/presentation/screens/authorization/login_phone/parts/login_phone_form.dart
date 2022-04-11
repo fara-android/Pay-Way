@@ -11,6 +11,8 @@ class _LoginPhoneFormState extends State<LoginPhoneForm> {
   ValueNotifier<String> phoneNumberText = ValueNotifier('');
   late FocusNode focusNode;
 
+  final firebaseAuth = FirebaseAuth.instance;
+
   @override
   void initState() {
     focusNode = FocusNode();
@@ -30,7 +32,6 @@ class _LoginPhoneFormState extends State<LoginPhoneForm> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Spacer(),
-        AppLogo(width: 120, height: 120),
         SizedBox(height: 42),
         Text(
           "Войти",
@@ -59,17 +60,40 @@ class _LoginPhoneFormState extends State<LoginPhoneForm> {
               return CustomButton(
                 text: "Далее",
                 isDisabled: phoneNumberText.value.length != 18,
-                onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => LoginCodeScreen(),
-                  ),
-                ),
+                onPressed: () {
+                  // print(phoneNumberText.value.replaceAll('(,)', ''));
+                  verifyPhoneNumber(context);
+                },
                 backgroundColor: Styles.brandBlue,
               );
             }),
         SizedBox(height: 32),
       ],
+    );
+  }
+
+  void verifyPhoneNumber(BuildContext context) {
+    firebaseAuth.verifyPhoneNumber(
+      phoneNumber: '+996555505708',
+      verificationCompleted: (credential) async {
+        await firebaseAuth.signInWithCredential(credential).then((value) {
+          print('success');
+        });
+      },
+      verificationFailed: (authException) {
+        print(authException);
+      },
+      codeSent: (verificationId, resendToken) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => LoginCodeScreen(
+              verificationId: verificationId,
+            ),
+          ),
+        );
+      },
+      codeAutoRetrievalTimeout: (verificationId) {},
     );
   }
 }

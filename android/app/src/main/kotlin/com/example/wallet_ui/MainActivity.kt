@@ -1,4 +1,4 @@
-package com.example.wallet_ui
+package kg.atlas.payway
 
 import io.flutter.embedding.android.FlutterFragmentActivity
 import io.flutter.embedding.engine.FlutterEngine

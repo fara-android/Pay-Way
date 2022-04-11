@@ -16,7 +16,7 @@ var phoneNumberFormatter = MaskTextInputFormatter(
     type: MaskAutoCompletionType.lazy);
 
 var pinFormatter = MaskTextInputFormatter(
-    mask: '####',
+    mask: '######',
     filter: {"#": RegExp(r'[0-9]')},
     type: MaskAutoCompletionType.lazy);
 

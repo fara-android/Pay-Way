@@ -34,7 +34,6 @@ class _LoginPinFormState extends State<LoginPinForm> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Spacer(),
-        AppLogo(width: 120, height: 120),
         SizedBox(height: 16),
         Text(
           "Войти",
