@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wallet_ui/core/styles.dart';
+import 'package:wallet_ui/features/presentation/screens/history/history_screen.dart';
 import 'package:wallet_ui/features/presentation/screens/main/main_screen/main_screen.dart';
 
 class Menu extends StatefulWidget {
@@ -14,7 +15,7 @@ class _MenuState extends State<Menu> {
   var screens = [
     MainScreen(),
     MainScreen(),
-    MainScreen(),
+    HistoryScreen(),
     MainScreen(),
   ];
 

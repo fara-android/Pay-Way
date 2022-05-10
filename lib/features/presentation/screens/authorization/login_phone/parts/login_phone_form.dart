@@ -55,17 +55,18 @@ class _LoginPhoneFormState extends State<LoginPhoneForm> {
         SizedBox(height: 16),
         Spacer(),
         ValueListenableBuilder(
-            valueListenable: phoneNumberText,
-            builder: (context, str, _) {
-              return CustomButton(
-                text: "Далее",
-                isDisabled: phoneNumberText.value.length != 18,
-                onPressed: () {
-                  verifyPhoneNumber(context);
-                },
-                backgroundColor: Styles.brandBlue,
-              );
-            }),
+          valueListenable: phoneNumberText,
+          builder: (context, str, _) {
+            return CustomButton(
+              text: "Далее",
+              isDisabled: phoneNumberText.value.length != 18,
+              onPressed: () {
+                verifyPhoneNumber(context);
+              },
+              backgroundColor: Styles.brandBlue,
+            );
+          },
+        ),
         SizedBox(height: 32),
       ],
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wallet_ui/core/styles.dart';
 import 'package:wallet_ui/features/presentation/screens/main/main_screen/components/custom_finance_container.dart';
 import 'package:wallet_ui/features/presentation/screens/main/main_screen/components/custom_form_top_up.dart';
@@ -8,9 +9,11 @@ import 'package:wallet_ui/features/presentation/screens/main/main_screen/compone
 import 'package:wallet_ui/features/presentation/screens/main/main_screen/components/favorites_custom_circle_avatar.dart';
 import 'package:wallet_ui/features/presentation/screens/main/main_screen/components/custom_fast_action_container.dart';
 import 'package:wallet_ui/features/presentation/screens/main/search_screen.dart/search_screen.dart';
+import 'package:wallet_ui/features/presentation/screens/main_authorization/login_email_screen.dart';
 import 'package:wallet_ui/features/presentation/widgets/countup.dart';
 import 'package:wallet_ui/features/presentation/widgets/custom_button.dart';
 import 'package:wallet_ui/features/presentation/widgets/scale_animated_container.dart';
+import 'package:wallet_ui/service_locator.dart';
 
 part 'part/home_appbar.dart';
 part 'part/fast_balance_actions.dart';

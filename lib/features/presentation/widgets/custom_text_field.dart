@@ -10,6 +10,7 @@ class CustomTextField extends StatefulWidget {
   final Icon? icon;
   final bool? filled;
   final Color? fillColor;
+  final Widget? suffixIcon;
   final Color borderColor;
   final TextInputType? textInputType;
   final bool obscureeText;
@@ -32,6 +33,7 @@ class CustomTextField extends StatefulWidget {
     this.obscureeText = false,
     this.underlineWidth = 1.0,
     this.enabled = true,
+    this.suffixIcon,
   }) : super(key: key);
 
   @override
@@ -51,6 +53,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       enabled: widget.enabled,
       inputFormatters: widget.inputFormatters,
       decoration: InputDecoration(
+        suffixIcon: widget.suffixIcon,
         prefixIcon: widget.icon,
         hintText: widget.hintText,
         hintStyle: TextStyle(color: Colors.grey),

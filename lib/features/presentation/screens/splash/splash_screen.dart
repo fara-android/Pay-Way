@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wallet_ui/core/styles.dart';
 import 'package:wallet_ui/features/presentation/screens/authorization/login_biometrics/login_biometrics_screen.dart';
 import 'package:wallet_ui/features/presentation/screens/authorization/login_phone/login_phone_screen.dart';
+import 'package:wallet_ui/features/presentation/screens/main_authorization/login_email_screen.dart';
 import 'package:wallet_ui/features/presentation/widgets/app_logo.dart';
 import 'package:wallet_ui/service_locator.dart';
 
@@ -53,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen> {
     } else {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => LoginPhoneScreen()),
+        MaterialPageRoute(builder: (context) => LoginEmailScreen()),
       );
     }
   }

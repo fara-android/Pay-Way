@@ -38,7 +38,19 @@ class HomeAppBar extends StatelessWidget {
             },
             child: Icon(Icons.search, color: Styles.textColor)),
         SizedBox(width: 22),
-        Icon(Icons.web, color: Styles.textColor),
+        IconButton(
+            icon: Icon(Icons.web),
+            onPressed: () {
+              final prefs = sl<SharedPreferences>();
+              prefs.clear();
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LoginEmailScreen(),
+                  ),
+                  (route) => false);
+            },
+            color: Styles.textColor),
         SizedBox(width: 22),
         InkWell(
             onTap: () => showModalBottomSheet(

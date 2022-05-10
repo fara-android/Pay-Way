@@ -4,6 +4,7 @@ class Styles {
   // Colors
 
   static const Color grey = Color(0xFF1E1E1E);
+  static const Color grey4 = Color(0xFFBDBDBD);
   static const Color white = Color(0xFFFFFFFF);
   static const Color mainColor = Color(0xFFFE8200);
   static const Color green = Color(0xFF71B440);
