@@ -25,7 +25,16 @@ class FastBalanceactions extends StatelessWidget {
         CustomFastActionContainer(
           text: "Перевести",
           icon: Icon(Icons.arrow_forward_ios, color: Styles.backgroundColor2),
-          onTap: () {},
+          onTap: () {
+            showModalBottomSheet(
+              backgroundColor: Colors.transparent,
+              isScrollControlled: true,
+              context: context,
+              builder: (context) {
+                return _MoneyTransferBottomSheet();
+              },
+            );
+          },
         ),
         CustomFastActionContainer(
           text: "Запросить",
@@ -160,7 +169,71 @@ class _TopUpFromMapBottomSheet extends StatelessWidget {
               SizedBox(height: 48),
               Text("Номер вашей карты",
                   style: TextStyle(color: Styles.textColor2, fontSize: 12)),
-                  TextField()
+              TextField()
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _MoneyTransferBottomSheet extends StatelessWidget {
+  _MoneyTransferBottomSheet({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(12), topRight: Radius.circular(12)),
+        color: Styles.backgroundColor,
+      ),
+      padding: EdgeInsets.all(16),
+      margin: EdgeInsets.only(top: 64),
+      child: ListView(
+        physics: ClampingScrollPhysics(),
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(height: 4),
+              Align(
+                alignment: Alignment.centerRight,
+                child: InkWell(
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Icon(
+                    Icons.close,
+                    color: Styles.backgroundColor2,
+                  ),
+                ),
+              ),
+              SizedBox(height: 14),
+              Text(
+                "Перевести",
+                style: TextStyle(
+                    fontSize: 24,
+                    color: Styles.textColor,
+                    fontWeight: FontWeight.w700),
+              ),
+              SizedBox(height: 48),
+              CustomFormTopUp(
+                text: "На другой кошелек",
+                icon: Icon(Icons.person),
+                onTap: () {
+                  showModalBottomSheet(
+                    backgroundColor: Colors.transparent,
+                    isScrollControlled: true,
+                    context: context,
+                    builder: (context) {
+                      return _TopUpFromMapBottomSheet();
+                    },
+                  );
+                },
+              ),
             ],
           ),
         ],
