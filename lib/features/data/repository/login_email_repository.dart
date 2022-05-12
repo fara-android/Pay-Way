@@ -15,7 +15,7 @@ class LoginEmailRepository extends RepoAuth {
         .loginEmail(email: email, password: password);
 
     if (response.error == null) {
-      return RepoAuthResult(token: response.token);
+      return RepoAuthResult(loginEmailModel: response.loginEmailModel);
     }
 
     return RepoAuthResult(error: AppError(message: response.error!.message));

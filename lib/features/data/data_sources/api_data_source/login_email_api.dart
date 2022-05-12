@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:wallet_ui/core/app_error.dart';
+import 'package:wallet_ui/features/data/models/login/login_email_model.dart';
 import 'package:wallet_ui/features/domain/repositories/repo_auth/repo_auth.dart';
 import 'package:wallet_ui/core/extensions/object.dart';
 
@@ -22,7 +23,8 @@ class LoginEmailApi {
         },
       );
 
-      return RepoAuthResult(token: response.data['token']);
+      return RepoAuthResult(
+          loginEmailModel: LoginEmailModel.fromJson(response.data));
     } catch (error) {
       return RepoAuthResult(
         error: AppError(message: error.dioErrorMessage),

@@ -17,7 +17,9 @@ class LoginEmailCubit extends Cubit<LoginEmailState> {
     final response =
         await loginEmailCase.loginEmail(email: email, password: password);
     if (response.error == null) {
-      emit(LoginEmailState.loginSuccess(token: response.token!));
+      emit(
+        LoginEmailState.loginSuccess(token: response.loginEmailModel!.token!),
+      );
     } else {
       emit(LoginEmailState.loginFailed(errorMessage: response.error!.message));
     }

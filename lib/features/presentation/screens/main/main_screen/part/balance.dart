@@ -5,14 +5,39 @@ class Balance extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Countup(
-      begin: 0,
-      end: 694.34,
-      duration: Duration(seconds: 1),
-      precision: 2,
-      style: TextStyle(
-        fontSize: 36,
-      ),
+    return BlocBuilder<UserCubit, UserState>(
+      builder: (context, state) {
+        return state.when(
+          initial: () => Countup(
+            begin: 0,
+            end: 0,
+            duration: Duration(seconds: 1),
+            precision: 2,
+            style: TextStyle(
+              fontSize: 36,
+            ),
+          ),
+          loading: () => Countup(
+            begin: 0,
+            end: 0,
+            duration: Duration(seconds: 1),
+            precision: 2,
+            style: TextStyle(
+              fontSize: 36,
+            ),
+          ),
+          loaded: (user) => Countup(
+            begin: 0,
+            end: double.tryParse(user.data?.wallets?[0].balance ?? '') ?? 2,
+            duration: Duration(seconds: 1),
+            precision: 2,
+            style: TextStyle(
+              fontSize: 36,
+            ),
+          ),
+          failed: (e) => Text(e),
+        );
+      },
     );
     // return Text.rich(
     //   TextSpan(

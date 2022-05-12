@@ -1,7 +1,7 @@
 part of '../main_screen.dart';
 
 class FastBalanceactions extends StatelessWidget {
-  const FastBalanceactions({Key? key}) : super(key: key);
+  FastBalanceactions({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -178,8 +178,18 @@ class _TopUpFromMapBottomSheet extends StatelessWidget {
   }
 }
 
-class _MoneyTransferBottomSheet extends StatelessWidget {
+class _MoneyTransferBottomSheet extends StatefulWidget {
   _MoneyTransferBottomSheet({Key? key}) : super(key: key);
+
+  @override
+  State<_MoneyTransferBottomSheet> createState() =>
+      _MoneyTransferBottomSheetState();
+}
+
+class _MoneyTransferBottomSheetState extends State<_MoneyTransferBottomSheet> {
+  final TextEditingController recieverController =
+      TextEditingController(text: 'thehangover24@gmail.com');
+  final TextEditingController amountController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -229,7 +239,82 @@ class _MoneyTransferBottomSheet extends StatelessWidget {
                     isScrollControlled: true,
                     context: context,
                     builder: (context) {
-                      return _TopUpFromMapBottomSheet();
+                      return Container(
+                        padding: EdgeInsets.all(16),
+                        margin: EdgeInsets.only(top: 64),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(12),
+                              topRight: Radius.circular(12)),
+                          color: Styles.backgroundColor,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(height: 4),
+                            Align(
+                              alignment: Alignment.centerRight,
+                              child: InkWell(
+                                onTap: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Icon(
+                                  Icons.close,
+                                  color: Styles.backgroundColor2,
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 14),
+                            Text(
+                              "Перевести",
+                              style: TextStyle(
+                                  fontSize: 24,
+                                  color: Styles.textColor,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                            SizedBox(height: 48),
+                            CustomTextField(
+                              hintText: 'Введите реквизиты',
+                              controller: recieverController,
+                            ),
+                            SizedBox(height: 16),
+                            CustomTextField(
+                              hintText: 'Сумма',
+                              controller: amountController,
+                              textInputType: TextInputType.number,
+                            ),
+                            Spacer(),
+                            CustomButton(
+                              text: 'Продолжить',
+                              onPressed: () {
+                                FocusScope.of(context).unfocus();
+                                Future.delayed(Duration(milliseconds: 200))
+                                    .then((value) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          AcceptTransferScreen(
+                                        reciver: recieverController.text,
+                                        amount: amountController.text,
+                                      ),
+                                    ),
+                                  );
+                                });
+                              },
+                              backgroundColor: Styles.brandBlue,
+                            ),
+                            SizedBox(
+                              height:
+                                  MediaQuery.of(context).viewInsets.bottom == 0
+                                      ? 16
+                                      : MediaQuery.of(context)
+                                          .viewInsets
+                                          .bottom,
+                            ),
+                          ],
+                        ),
+                      );
                     },
                   );
                 },

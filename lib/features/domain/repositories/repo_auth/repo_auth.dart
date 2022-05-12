@@ -1,4 +1,5 @@
 import 'package:wallet_ui/core/app_error.dart';
+import 'package:wallet_ui/features/data/models/login/login_email_model.dart';
 
 abstract class RepoAuth {
   Future<RepoAuthResult> loginEmail({
@@ -10,12 +11,13 @@ abstract class RepoAuth {
 class RepoAuthResult {
   RepoAuthResult({
     this.error,
-    this.token,
+    this.loginEmailModel,
   });
 
   final AppError? error;
-  final String? token;
+  final LoginEmailModel? loginEmailModel;
 
   @override
-  String toString() => 'RepoAuthResult(error: $error, result: $token)';
+  String toString() =>
+      'RepoAuthResult(error: $error, result: $loginEmailModel)';
 }
