@@ -14,6 +14,8 @@ class HistoryPaymentsApi {
       return RepoHistoryPaymentsResult(
           historyPaymentModel: HistoryPaymentModel.fromJson(response.data));
     } catch (e) {
+      print('object$e');
+
       return RepoHistoryPaymentsResult(
           error: AppError(message: e.dioErrorMessage));
     }

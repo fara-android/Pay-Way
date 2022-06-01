@@ -61,7 +61,13 @@ class _LoginPhoneFormState extends State<LoginPhoneForm> {
               text: "Далее",
               isDisabled: phoneNumberText.value.length != 18,
               onPressed: () {
-                verifyPhoneNumber(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LoginCodeScreen(),
+                  ),
+                );
+                // verifyPhoneNumber(context);
               },
               backgroundColor: Styles.brandBlue,
             );
@@ -72,31 +78,31 @@ class _LoginPhoneFormState extends State<LoginPhoneForm> {
     );
   }
 
-  void verifyPhoneNumber(BuildContext context) {
-    firebaseAuth.verifyPhoneNumber(
-      phoneNumber: phoneNumberText.value
-          .replaceAll('(', '')
-          .replaceAll(')', '')
-          .replaceAll(' ', ''),
-      verificationCompleted: (credential) async {
-        await firebaseAuth.signInWithCredential(credential).then((value) {
-          print('success');
-        });
-      },
-      verificationFailed: (authException) {
-        print(authException);
-      },
-      codeSent: (verificationId, resendToken) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => LoginCodeScreen(
-              verificationId: verificationId,
-            ),
-          ),
-        );
-      },
-      codeAutoRetrievalTimeout: (verificationId) {},
-    );
-  }
+  // void verifyPhoneNumber(BuildContext context) {
+  //   firebaseAuth.verifyPhoneNumber(
+  //     phoneNumber: phoneNumberText.value
+  //         .replaceAll('(', '')
+  //         .replaceAll(')', '')
+  //         .replaceAll(' ', ''),
+  //     verificationCompleted: (credential) async {
+  //       await firebaseAuth.signInWithCredential(credential).then((value) {
+  //         print('success');
+  //       });
+  //     },
+  //     verificationFailed: (authException) {
+  //       print(authException);
+  //     },
+  //     codeSent: (verificationId, resendToken) {
+  // Navigator.push(
+  //   context,
+  //   MaterialPageRoute(
+  //     builder: (context) => LoginCodeScreen(
+  //       verificationId: verificationId,
+  //     ),
+  //   ),
+  // );
+  //     },
+  //     codeAutoRetrievalTimeout: (verificationId) {},
+  //   );
+  // }
 }

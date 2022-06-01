@@ -23,7 +23,5 @@ class LoginPinCubit extends Cubit<LoginPinState> {
 @freezed
 class LoginPinState with _$LoginPinState {
   const factory LoginPinState.initial() = _Initial;
-  const factory LoginPinState.loading() = _Loading;
   const factory LoginPinState.success() = _Success;
-  const factory LoginPinState.failed() = _Failed;
 }

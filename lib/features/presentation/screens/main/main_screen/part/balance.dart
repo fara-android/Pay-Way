@@ -28,14 +28,17 @@ class Balance extends StatelessWidget {
           ),
           loaded: (user) => Countup(
             begin: 0,
-            end: double.tryParse(user.data?.wallets?[0].balance ?? '') ?? 2,
+            end: user.data?.wallets?[0].balance ?? 0,
             duration: Duration(seconds: 1),
             precision: 2,
             style: TextStyle(
               fontSize: 36,
             ),
           ),
-          failed: (e) => Text(e),
+          failed: (e) => Text(
+            e,
+            style: Styles.ts16(Styles.white),
+          ),
         );
       },
     );

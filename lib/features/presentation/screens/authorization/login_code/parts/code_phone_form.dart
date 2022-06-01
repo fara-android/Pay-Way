@@ -1,10 +1,8 @@
 part of '../code_phone_screen.dart';
 
 class CodePhoneForm extends StatefulWidget {
-  final String verificationId;
   CodePhoneForm({
     Key? key,
-    required this.verificationId,
   }) : super(key: key);
 
   @override
@@ -64,7 +62,12 @@ class _CodePhoneFormState extends State<CodePhoneForm> {
               return CustomButton(
                 text: "Далее",
                 isDisabled: false,
-                onPressed: () => verifyOTP(),
+                onPressed: () => Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LoginPinScreen(),
+                  ),
+                ),
                 backgroundColor: Styles.brandBlue,
               );
             }),
@@ -73,19 +76,19 @@ class _CodePhoneFormState extends State<CodePhoneForm> {
     );
   }
 
-  void verifyOTP() async {
-    PhoneAuthCredential credential = PhoneAuthProvider.credential(
-        verificationId: widget.verificationId, smsCode: codeText.value);
+  // void verifyOTP() async {
+  //   PhoneAuthCredential credential = PhoneAuthProvider.credential(
+  //       verificationId: widget.verificationId, smsCode: codeText.value);
 
-    await firebaseAuth.signInWithCredential(credential).whenComplete(
-      () {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => LoginPinScreen(),
-          ),
-        );
-      },
-    );
-  }
+  //   await firebaseAuth.signInWithCredential(credential).whenComplete(
+  //     () {
+  //       Navigator.pushReplacement(
+  //         context,
+  //         MaterialPageRoute(
+  //           builder: (context) => LoginPinScreen(),
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 }

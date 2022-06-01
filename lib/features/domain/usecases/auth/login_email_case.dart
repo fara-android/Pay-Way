@@ -18,12 +18,15 @@ class LoginEmailCase {
     final response =
         await repository.loginEmail(email: email, password: password);
     if (response.error == null) {
-      print("${response.loginEmailModel!.user?.id}");
       sharedPreferences.setString(
           'token', response.loginEmailModel!.token ?? '');
       sharedPreferences.setInt(
         'userId',
         response.loginEmailModel!.user?.id ?? 0,
+      );
+      sharedPreferences.setInt(
+        'walletId',
+        response.loginEmailModel!.user?.wallets?.first.id ?? 0,
       );
 
       return response;

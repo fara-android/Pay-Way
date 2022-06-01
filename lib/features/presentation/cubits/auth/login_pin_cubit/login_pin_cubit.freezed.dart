@@ -21,16 +21,8 @@ class _$LoginPinStateTearOff {
     return const _Initial();
   }
 
-  _Loading loading() {
-    return const _Loading();
-  }
-
   _Success success() {
     return const _Success();
-  }
-
-  _Failed failed() {
-    return const _Failed();
   }
 }
 
@@ -42,50 +34,38 @@ mixin _$LoginPinState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
     required TResult Function() success,
-    required TResult Function() failed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
     TResult Function()? success,
-    TResult Function()? failed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
     TResult Function()? success,
-    TResult Function()? failed,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
-    required TResult Function(_Failed value) failed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
-    TResult Function(_Failed value)? failed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
-    TResult Function(_Failed value)? failed,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -146,9 +126,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
     required TResult Function() success,
-    required TResult Function() failed,
   }) {
     return initial();
   }
@@ -157,9 +135,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
     TResult Function()? success,
-    TResult Function()? failed,
   }) {
     return initial?.call();
   }
@@ -168,9 +144,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
     TResult Function()? success,
-    TResult Function()? failed,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -183,9 +157,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
-    required TResult Function(_Failed value) failed,
   }) {
     return initial(this);
   }
@@ -194,9 +166,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
-    TResult Function(_Failed value)? failed,
   }) {
     return initial?.call(this);
   }
@@ -205,9 +175,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
-    TResult Function(_Failed value)? failed,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -219,119 +187,6 @@ class _$_Initial implements _Initial {
 
 abstract class _Initial implements LoginPinState {
   const factory _Initial() = _$_Initial;
-}
-
-/// @nodoc
-abstract class _$LoadingCopyWith<$Res> {
-  factory _$LoadingCopyWith(_Loading value, $Res Function(_Loading) then) =
-      __$LoadingCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$LoadingCopyWithImpl<$Res> extends _$LoginPinStateCopyWithImpl<$Res>
-    implements _$LoadingCopyWith<$Res> {
-  __$LoadingCopyWithImpl(_Loading _value, $Res Function(_Loading) _then)
-      : super(_value, (v) => _then(v as _Loading));
-
-  @override
-  _Loading get _value => super._value as _Loading;
-}
-
-/// @nodoc
-
-class _$_Loading implements _Loading {
-  const _$_Loading();
-
-  @override
-  String toString() {
-    return 'LoginPinState.loading()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _Loading);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function() success,
-    required TResult Function() failed,
-  }) {
-    return loading();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function()? success,
-    TResult Function()? failed,
-  }) {
-    return loading?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function()? success,
-    TResult Function()? failed,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Success value) success,
-    required TResult Function(_Failed value) failed,
-  }) {
-    return loading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Success value)? success,
-    TResult Function(_Failed value)? failed,
-  }) {
-    return loading?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Success value)? success,
-    TResult Function(_Failed value)? failed,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Loading implements LoginPinState {
-  const factory _Loading() = _$_Loading;
 }
 
 /// @nodoc
@@ -372,9 +227,7 @@ class _$_Success implements _Success {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
     required TResult Function() success,
-    required TResult Function() failed,
   }) {
     return success();
   }
@@ -383,9 +236,7 @@ class _$_Success implements _Success {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
     TResult Function()? success,
-    TResult Function()? failed,
   }) {
     return success?.call();
   }
@@ -394,9 +245,7 @@ class _$_Success implements _Success {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
     TResult Function()? success,
-    TResult Function()? failed,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -409,9 +258,7 @@ class _$_Success implements _Success {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
-    required TResult Function(_Failed value) failed,
   }) {
     return success(this);
   }
@@ -420,9 +267,7 @@ class _$_Success implements _Success {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
-    TResult Function(_Failed value)? failed,
   }) {
     return success?.call(this);
   }
@@ -431,9 +276,7 @@ class _$_Success implements _Success {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
-    TResult Function(_Failed value)? failed,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -445,117 +288,4 @@ class _$_Success implements _Success {
 
 abstract class _Success implements LoginPinState {
   const factory _Success() = _$_Success;
-}
-
-/// @nodoc
-abstract class _$FailedCopyWith<$Res> {
-  factory _$FailedCopyWith(_Failed value, $Res Function(_Failed) then) =
-      __$FailedCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$FailedCopyWithImpl<$Res> extends _$LoginPinStateCopyWithImpl<$Res>
-    implements _$FailedCopyWith<$Res> {
-  __$FailedCopyWithImpl(_Failed _value, $Res Function(_Failed) _then)
-      : super(_value, (v) => _then(v as _Failed));
-
-  @override
-  _Failed get _value => super._value as _Failed;
-}
-
-/// @nodoc
-
-class _$_Failed implements _Failed {
-  const _$_Failed();
-
-  @override
-  String toString() {
-    return 'LoginPinState.failed()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _Failed);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function() success,
-    required TResult Function() failed,
-  }) {
-    return failed();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function()? success,
-    TResult Function()? failed,
-  }) {
-    return failed?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function()? success,
-    TResult Function()? failed,
-    required TResult orElse(),
-  }) {
-    if (failed != null) {
-      return failed();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Success value) success,
-    required TResult Function(_Failed value) failed,
-  }) {
-    return failed(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Success value)? success,
-    TResult Function(_Failed value)? failed,
-  }) {
-    return failed?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Success value)? success,
-    TResult Function(_Failed value)? failed,
-    required TResult orElse(),
-  }) {
-    if (failed != null) {
-      return failed(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Failed implements LoginPinState {
-  const factory _Failed() = _$_Failed;
 }

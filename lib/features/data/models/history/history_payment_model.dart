@@ -28,8 +28,8 @@ class Data {
   int? userType;
   int? walletId;
   Currency? currency;
-  String? charge;
-  String? amount;
+  double? charge;
+  num? amount;
   String? remark;
   String? type;
   User? user;

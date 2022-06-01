@@ -10,10 +10,10 @@ import 'package:wallet_ui/core/input_text_formatters.dart' as formatters;
 part 'parts/code_phone_form.dart';
 
 class LoginCodeScreen extends StatelessWidget {
-  final String verificationId;
+  // final String verificationId;
   const LoginCodeScreen({
     Key? key,
-    required this.verificationId,
+    // required this.verificationId,
   }) : super(key: key);
 
   @override
@@ -27,8 +27,8 @@ class LoginCodeScreen extends StatelessWidget {
             height: Styles.getHeight(context),
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: CodePhoneForm(
-              verificationId: verificationId,
-            ),
+                // verificationId: verificationId,
+                ),
           ),
         ),
       ),

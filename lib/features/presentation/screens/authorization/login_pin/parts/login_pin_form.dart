@@ -77,9 +77,6 @@ class _LoginPinFormState extends State<LoginPinForm> {
                       (route) => false,
                     );
                   },
-                  failed: () {
-                    // TODO
-                  },
                 );
               },
               builder: (context, state) {

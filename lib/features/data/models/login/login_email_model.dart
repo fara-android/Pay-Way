@@ -91,7 +91,7 @@ class User {
 
 class Wallets {
   int? id;
-  String? balance;
+  double? balance;
   Currency? currency;
   String? createdAt;
 

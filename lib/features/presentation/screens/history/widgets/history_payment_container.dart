@@ -86,7 +86,8 @@ class HistoryPaymentContainer extends StatelessWidget {
                   ),
                   SizedBox(height: 16),
                   Text(
-                    historyPaymentModel.data?[currentIndex].amount ?? "",
+                    historyPaymentModel.data?[currentIndex].amount.toString() ??
+                        "",
                     style: Styles.ts18(Styles.grey4),
                   ),
                   SizedBox(height: 12),
@@ -200,7 +201,8 @@ class HistoryPaymentContainer extends StatelessWidget {
                                     SizedBox(height: 16),
                                     Text(
                                       historyPaymentModel
-                                              .data?[currentIndex].amount ??
+                                              .data?[currentIndex].amount
+                                              .toString() ??
                                           "",
                                       style: Styles.ts18(Styles.grey4),
                                     ),
@@ -258,7 +260,8 @@ class HistoryPaymentContainer extends StatelessWidget {
                     ),
                     Text(
                       double.tryParse(
-                            historyPaymentModel.data?[currentIndex].amount ??
+                            historyPaymentModel.data?[currentIndex].amount
+                                    .toString() ??
                                 '',
                           )?.toStringAsFixed(2) ??
                           '',

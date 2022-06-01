@@ -16,7 +16,6 @@ class UserCase {
 
     if (userId != null) {
       final response = await repository.getUser(userId: userId);
-
       return response;
     } else {
       return RepoUserResult(error: AppError(message: 'Пользователь не найден'));

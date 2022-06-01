@@ -98,28 +98,27 @@ class Transactions {
   int? userType;
   int? walletId;
   Currency? currency;
-  String? charge;
-  String? amount;
+  num? charge;
+  num? amount;
   String? remark;
   String? type;
   String? details;
-  Null? invoiceNum;
   String? createdAt;
 
-  Transactions(
-      {this.id,
-      this.trnx,
-      this.userId,
-      this.userType,
-      this.walletId,
-      this.currency,
-      this.charge,
-      this.amount,
-      this.remark,
-      this.type,
-      this.details,
-      this.invoiceNum,
-      this.createdAt});
+  Transactions({
+    this.id,
+    this.trnx,
+    this.userId,
+    this.userType,
+    this.walletId,
+    this.currency,
+    this.charge,
+    this.amount,
+    this.remark,
+    this.type,
+    this.details,
+    this.createdAt,
+  });
 
   Transactions.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -135,7 +134,6 @@ class Transactions {
     remark = json['remark'];
     type = json['type'];
     details = json['details'];
-    invoiceNum = json['invoice_num'];
     createdAt = json['created_at'];
   }
 
@@ -154,7 +152,6 @@ class Transactions {
     data['remark'] = this.remark;
     data['type'] = this.type;
     data['details'] = this.details;
-    data['invoice_num'] = this.invoiceNum;
     data['created_at'] = this.createdAt;
     return data;
   }
@@ -203,7 +200,7 @@ class Currency {
 
 class Wallets {
   int? id;
-  String? balance;
+  double? balance;
   Currency? currency;
   String? createdAt;
 

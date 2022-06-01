@@ -54,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen> {
     } else {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => LoginEmailScreen()),
+        MaterialPageRoute(builder: (context) => LoginPhoneScreen()),
       );
     }
   }
