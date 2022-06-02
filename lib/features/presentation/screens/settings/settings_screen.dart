@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wallet_ui/core/styles.dart';
+import 'package:wallet_ui/features/presentation/screens/identification/step_one_screen.dart';
 import 'package:wallet_ui/features/presentation/screens/settings/components/custom_setting_container.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -42,6 +43,7 @@ class SettingsScreen extends StatelessWidget {
                     color: Styles.white,
                   ),
                   title: 'Мои карты',
+                  onTap: () {},
                 ),
                 SizedBox(height: 16),
                 CustomSettingContainer(
@@ -50,6 +52,7 @@ class SettingsScreen extends StatelessWidget {
                     color: Styles.white,
                   ),
                   title: 'Мой QR',
+                  onTap: () {},
                 ),
                 SizedBox(height: 16),
                 CustomSettingContainer(
@@ -58,6 +61,14 @@ class SettingsScreen extends StatelessWidget {
                     color: Styles.white,
                   ),
                   title: 'Идентификация пользователя',
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => StepOneScreen(),
+                      ),
+                    );
+                  },
                 ),
                 SizedBox(height: 16),
                 CustomSettingContainer(
@@ -66,6 +77,7 @@ class SettingsScreen extends StatelessWidget {
                     color: Styles.white,
                   ),
                   title: 'Публичная оферта',
+                  onTap: () {},
                 ),
                 SizedBox(height: 16),
                 CustomSettingContainer(
@@ -74,6 +86,7 @@ class SettingsScreen extends StatelessWidget {
                     color: Styles.white,
                   ),
                   title: 'Настройки и безопасность',
+                  onTap: () {},
                 ),
                 SizedBox(height: 16),
                 CustomSettingContainer(
@@ -82,6 +95,7 @@ class SettingsScreen extends StatelessWidget {
                     color: Styles.white,
                   ),
                   title: 'Помощь',
+                  onTap: () {},
                 ),
                 SizedBox(height: 16),
                 CustomSettingContainer(
@@ -91,6 +105,7 @@ class SettingsScreen extends StatelessWidget {
                   ),
                   title: 'Выйти',
                   iconContainerColor: Styles.red,
+                  onTap: () {},
                 ),
                 SizedBox(height: 60),
               ],

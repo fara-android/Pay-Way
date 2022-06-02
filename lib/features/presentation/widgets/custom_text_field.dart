@@ -18,7 +18,8 @@ class CustomTextField extends StatefulWidget {
   final double underlineWidth;
   final bool enabled;
 
-  const CustomTextField({
+  const 
+  CustomTextField({
     Key? key,
     this.hintText,
     this.controller,
