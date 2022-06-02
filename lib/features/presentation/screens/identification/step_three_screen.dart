@@ -31,18 +31,99 @@ class StepThreeScreen extends StatelessWidget {
                 style: TextStyle(color: Styles.textColor, fontSize: 24),
               ),
               SizedBox(height: 32),
-              CustomTextfieldStep(labelTextt: "Номер карты"),
-              CustomTextfieldStep(labelTextt: "Имя"),
-              CustomTextfieldStep(labelTextt: "Отчество"),
-              CustomTextfieldStep(labelTextt: "Пол"),
-              CustomTextfieldStep(labelTextt: "Семейный статус"),
-              CustomTextfieldStep(labelTextt: "Дата рождения"),
-              CustomTextfieldStep(labelTextt: "Номер телефона"),
-              CustomTextfieldStep(labelTextt: "e-mail "),
-              // Spacer(),
+              CustomTextfieldStep(labelTextt: "Номер паспорта"),
+              CustomTextfieldStep(labelTextt: "Дата выдачи паспорта"),
+              CustomTextfieldStep(labelTextt: "Орган выдачи паспорта"),
+              CustomTextfieldStep(labelTextt: "Инн"),
+              SizedBox(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    width: Styles.getWidth(context) / 2.4,
+                    decoration: BoxDecoration(
+                      color: Color(0xFF022635),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(12),
+                      ),
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+                    child: Column(
+                      children: [
+                        Icon(
+                          Icons.cloud_upload_outlined,
+                          color: Styles.backgroundColor2,
+                          size: 32,
+                        ),
+                        SizedBox(height: 16),
+                        Text(
+                          'Фото паспорта с лицевой стороны',
+                          textAlign: TextAlign.center,
+                          style: Styles.ts16(Styles.white),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    width: Styles.getWidth(context) / 2.4,
+                    decoration: BoxDecoration(
+                      color: Color(0xFF022635),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(12),
+                      ),
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+                    child: Column(
+                      children: [
+                        Icon(
+                          Icons.cloud_upload_outlined,
+                          color: Styles.backgroundColor2,
+                          size: 32,
+                        ),
+                        SizedBox(height: 16),
+                        Text(
+                          'Фото паспорта с обратной стороны',
+                          textAlign: TextAlign.center,
+                          style: Styles.ts16(Styles.white),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 16),
+              Row(
+                children: [
+                  Container(
+                    width: Styles.getWidth(context) / 2.4,
+                    decoration: BoxDecoration(
+                      color: Color(0xFF022635),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(12),
+                      ),
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+                    child: Column(
+                      children: [
+                        Icon(
+                          Icons.cloud_upload_outlined,
+                          color: Styles.backgroundColor2,
+                          size: 32,
+                        ),
+                        SizedBox(height: 16),
+                        Text(
+                          'Сделайте селфи с паспортом',
+                          textAlign: TextAlign.center,
+                          style: Styles.ts16(Styles.white),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
               SizedBox(height: 14),
               CustomButton(
-                  text: "Далее",
+                  text: "Готово",
                   onPressed: () {
                     // Navigator.push(
                     //   context,
