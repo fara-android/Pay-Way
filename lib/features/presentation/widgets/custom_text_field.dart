@@ -7,6 +7,7 @@ class CustomTextField extends StatefulWidget {
   final TextEditingController? controller;
   final List<TextInputFormatter>? inputFormatters;
   final Function(String text)? onChange;
+  final Function(String text)? onSubmitted;
   final Icon? icon;
   final bool? filled;
   final Color? fillColor;
@@ -17,9 +18,11 @@ class CustomTextField extends StatefulWidget {
   final FocusNode? focusNode;
   final double underlineWidth;
   final bool enabled;
+  final String? label;
+  final String? initialValue;
+  final bool hasNext;
 
-  const 
-  CustomTextField({
+  const CustomTextField({
     Key? key,
     this.hintText,
     this.controller,
@@ -33,8 +36,12 @@ class CustomTextField extends StatefulWidget {
     this.textInputType,
     this.obscureeText = false,
     this.underlineWidth = 1.0,
+    this.label,
     this.enabled = true,
     this.suffixIcon,
+    this.initialValue,
+    this.hasNext = false,
+    this.onSubmitted,
   }) : super(key: key);
 
   @override
@@ -48,6 +55,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
       style: Styles.ts16(Styles.textColor),
       obscureText: widget.obscureeText,
       focusNode: widget.focusNode,
+      textInputAction:
+          widget.hasNext ? TextInputAction.unspecified : TextInputAction.done,
+      onFieldSubmitted: widget.onSubmitted != null
+          ? (text) => widget.onSubmitted!(text)
+          : null,
+      initialValue: widget.initialValue,
       keyboardType: widget.textInputType,
       controller: widget.controller,
       cursorColor: Styles.brandBlue,
@@ -57,22 +70,24 @@ class _CustomTextFieldState extends State<CustomTextField> {
         suffixIcon: widget.suffixIcon,
         prefixIcon: widget.icon,
         hintText: widget.hintText,
+        labelText: widget.label,
+        labelStyle: Styles.ts16(Styles.white.withOpacity(0.5)),
         hintStyle: TextStyle(color: Colors.grey),
         fillColor: widget.fillColor,
         filled: widget.filled,
         enabledBorder: UnderlineInputBorder(
             borderSide: BorderSide(
-          color: Styles.textColor,
+          color: Styles.textColor.withOpacity(0.5),
           width: widget.underlineWidth,
         )),
         border: UnderlineInputBorder(
             borderSide: BorderSide(
-          color: Styles.textColor,
+          color: Styles.textColor.withOpacity(0.5),
           width: widget.underlineWidth,
         )),
         focusedBorder: UnderlineInputBorder(
             borderSide: BorderSide(
-          color: Styles.textColor,
+          color: Styles.white,
           width: widget.underlineWidth,
         )),
       ),

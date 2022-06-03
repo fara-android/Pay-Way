@@ -1,8 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wallet_ui/core/styles.dart';
-import 'package:wallet_ui/features/presentation/screens/identification/components/custom_text_field_step_one.dart';
+import 'package:wallet_ui/features/presentation/screens/identification/step_four_screen.dart';
 import 'package:wallet_ui/features/presentation/widgets/custom_button.dart';
+import 'package:wallet_ui/features/presentation/widgets/custom_date_time_picker.dart';
+import 'package:wallet_ui/features/presentation/widgets/custom_drop_down_button.dart';
+import 'package:wallet_ui/features/presentation/widgets/custom_text_field.dart';
 
 class StepThreeScreen extends StatelessWidget {
   const StepThreeScreen({Key? key}) : super(key: key);
@@ -27,116 +29,53 @@ class StepThreeScreen extends StatelessWidget {
             children: [
               SizedBox(height: 14),
               Text(
-                "Шаг 3 из 3",
+                "Шаг 3 из 4",
                 style: TextStyle(color: Styles.textColor, fontSize: 24),
               ),
+              SizedBox(height: 48),
+              CustomTextField(
+                hintText: 'Номер Телефона',
+              ),
+              DropDown(
+                items: ['sss', 'ads', 'asd'],
+                isExpanded: true,
+                hint: Text(
+                  'Пол',
+                  style: Styles.ts16(
+                    Styles.white.withOpacity(0.5),
+                  ),
+                ),
+              ),
+              SizedBox(height: 16),
+              DropDown(
+                items: ['sss', 'ads', 'asd'],
+                isExpanded: true,
+                hint: Text(
+                  'Семейный статус',
+                  style: Styles.ts16(
+                    Styles.white.withOpacity(0.5),
+                  ),
+                ),
+              ),
+              SizedBox(height: 16),
+              CustomDateTimePicker(
+                title: 'Дата рождения',
+                backgroundColor: Color(0xFF022635),
+                onChose: (text) {},
+              ),
               SizedBox(height: 32),
-              CustomTextfieldStep(labelTextt: "Номер паспорта"),
-              CustomTextfieldStep(labelTextt: "Дата выдачи паспорта"),
-              CustomTextfieldStep(labelTextt: "Орган выдачи паспорта"),
-              CustomTextfieldStep(labelTextt: "Инн"),
-              SizedBox(height: 16),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    width: Styles.getWidth(context) / 2.4,
-                    decoration: BoxDecoration(
-                      color: Color(0xFF022635),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(12),
-                      ),
-                    ),
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
-                    child: Column(
-                      children: [
-                        Icon(
-                          Icons.cloud_upload_outlined,
-                          color: Styles.backgroundColor2,
-                          size: 32,
-                        ),
-                        SizedBox(height: 16),
-                        Text(
-                          'Фото паспорта с лицевой стороны',
-                          textAlign: TextAlign.center,
-                          style: Styles.ts16(Styles.white),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    width: Styles.getWidth(context) / 2.4,
-                    decoration: BoxDecoration(
-                      color: Color(0xFF022635),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(12),
-                      ),
-                    ),
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
-                    child: Column(
-                      children: [
-                        Icon(
-                          Icons.cloud_upload_outlined,
-                          color: Styles.backgroundColor2,
-                          size: 32,
-                        ),
-                        SizedBox(height: 16),
-                        Text(
-                          'Фото паспорта с обратной стороны',
-                          textAlign: TextAlign.center,
-                          style: Styles.ts16(Styles.white),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 16),
-              Row(
-                children: [
-                  Container(
-                    width: Styles.getWidth(context) / 2.4,
-                    decoration: BoxDecoration(
-                      color: Color(0xFF022635),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(12),
-                      ),
-                    ),
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
-                    child: Column(
-                      children: [
-                        Icon(
-                          Icons.cloud_upload_outlined,
-                          color: Styles.backgroundColor2,
-                          size: 32,
-                        ),
-                        SizedBox(height: 16),
-                        Text(
-                          'Сделайте селфи с паспортом',
-                          textAlign: TextAlign.center,
-                          style: Styles.ts16(Styles.white),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 14),
               CustomButton(
-                  text: "Готово",
+                  text: "Далее",
                   onPressed: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => StepTwoScreen(),
-                    //   ),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => StepFourScreen(),
+                      ),
+                    );
                   },
                   backgroundColor: Styles.backgroundColor2),
-              SizedBox(height: 10),
-              SizedBox(
-                height: 18,
-              )
+              SizedBox(height: 30)
             ],
           ),
         ),

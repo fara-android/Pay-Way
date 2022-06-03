@@ -5,7 +5,6 @@ import 'package:local_auth/local_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wallet_ui/core/styles.dart';
 import 'package:wallet_ui/features/presentation/screens/authorization/login_phone/login_phone_screen.dart';
-import 'package:wallet_ui/features/presentation/screens/main/main_screen/main_screen.dart';
 import 'package:wallet_ui/features/presentation/screens/menu/menu.dart';
 import 'package:wallet_ui/service_locator.dart';
 
@@ -91,12 +90,12 @@ class _LoginBiometricsScreenState extends State<LoginBiometricsScreen> {
                 onTap: () {},
               ),
         didUnlocked: () => Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-              builder: (context) => Menu(),
-            ),
-            (route) => false,
+          context,
+          MaterialPageRoute(
+            builder: (context) => Menu(),
           ),
+          (route) => false,
+        ),
       ),
     );
   }

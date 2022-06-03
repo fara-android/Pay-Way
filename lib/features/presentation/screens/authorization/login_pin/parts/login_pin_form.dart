@@ -54,7 +54,7 @@ class _LoginPinFormState extends State<LoginPinForm> {
         CustomTextField(
           hintText: "xxxx",
           focusNode: focusNode,
-          textInputType: TextInputType.phone,
+          textInputType: TextInputType.number,
           inputFormatters: [formatters.pinFormatter],
           onChange: (text) => pinText.value = text,
           obscureeText: true,

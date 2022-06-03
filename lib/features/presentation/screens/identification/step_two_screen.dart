@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:wallet_ui/core/styles.dart';
-import 'package:wallet_ui/features/presentation/screens/identification/components/custom_text_field_step_one.dart';
 import 'package:wallet_ui/features/presentation/screens/identification/step_three_screen.dart';
 import 'package:wallet_ui/features/presentation/widgets/custom_button.dart';
+import 'package:wallet_ui/features/presentation/widgets/custom_drop_down_button.dart';
+import 'package:wallet_ui/features/presentation/widgets/custom_text_field.dart';
 
 class StepTwoScreen extends StatelessWidget {
   const StepTwoScreen({Key? key}) : super(key: key);
@@ -28,29 +29,85 @@ class StepTwoScreen extends StatelessWidget {
             children: [
               SizedBox(height: 14),
               Text(
-                "Шаг 2 из 3",
+                "Шаг 2 из 4",
                 style: TextStyle(color: Styles.textColor, fontSize: 24),
               ),
-              SizedBox(height: 32),
-              CustomTextfieldStep(labelTextt: "Страна"),
-              CustomTextfieldStep(labelTextt: "Область"),
-              CustomTextfieldStep(labelTextt: "Город/село"),
-              CustomTextfieldStep(labelTextt: "Район"),
-              CustomTextfieldStep(labelTextt: "Улица"),
-              CustomTextfieldStep(labelTextt: "Дом"),
-              CustomTextfieldStep(labelTextt: "Квартира"),
               SizedBox(height: 48),
+              DropDown(
+                items: ['sss', 'ads', 'asd'],
+                isExpanded: true,
+                hint: Text(
+                  'Страна',
+                  style: Styles.ts16(
+                    Styles.white.withOpacity(0.5),
+                  ),
+                ),
+              ),
+              SizedBox(height: 16),
+              DropDown(
+                items: ['sss', 'ads', 'asd'],
+                isExpanded: true,
+                hint: Text(
+                  'Область',
+                  style: Styles.ts16(
+                    Styles.white.withOpacity(0.5),
+                  ),
+                ),
+              ),
+              SizedBox(height: 16),
+              DropDown(
+                items: ['sss', 'ads', 'asd'],
+                isExpanded: true,
+                hint: Text(
+                  'Город/Село',
+                  style: Styles.ts16(
+                    Styles.white.withOpacity(0.5),
+                  ),
+                ),
+              ),
+              SizedBox(height: 16),
+              DropDown(
+                items: ['sss', 'ads', 'asd'],
+                isExpanded: true,
+                hint: Text(
+                  'Район',
+                  style: Styles.ts16(
+                    Styles.white.withOpacity(0.5),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 2),
+                child: CustomTextField(
+                  label: 'Улица',
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 2),
+                child: CustomTextField(
+                  label: 'Дом',
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 2),
+                child: CustomTextField(
+                  label: 'Квартира',
+                ),
+              ),
+              SizedBox(height: 32),
               CustomButton(
-                  text: "Далее",
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => StepThreeScreen(),
-                      ),
-                    );
-                  },
-                  backgroundColor: Styles.backgroundColor2),
+                text: "Далее",
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => StepThreeScreen(),
+                    ),
+                  );
+                },
+                backgroundColor: Styles.backgroundColor2,
+              ),
+              SizedBox(height: 32),
             ],
           ),
         ),

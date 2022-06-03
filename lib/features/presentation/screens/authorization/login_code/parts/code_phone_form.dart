@@ -1,8 +1,12 @@
 part of '../code_phone_screen.dart';
 
 class CodePhoneForm extends StatefulWidget {
+  final String phoneNumber;
+  final String code;
   CodePhoneForm({
     Key? key,
+    required this.phoneNumber,
+    required this.code,
   }) : super(key: key);
 
   @override
@@ -11,6 +15,7 @@ class CodePhoneForm extends StatefulWidget {
 
 class _CodePhoneFormState extends State<CodePhoneForm> {
   ValueNotifier<String> codeText = ValueNotifier('');
+  ValueNotifier<bool> isLoading = ValueNotifier(false);
   late FocusNode focusNode;
 
   final firebaseAuth = FirebaseAuth.instance;
@@ -56,21 +61,55 @@ class _CodePhoneFormState extends State<CodePhoneForm> {
         ),
         SizedBox(height: 16),
         Spacer(),
-        ValueListenableBuilder(
-            valueListenable: codeText,
-            builder: (context, str, _) {
-              return CustomButton(
+        MultiValueListenableBuilder(
+          first: codeText,
+          second: isLoading,
+          doubleBuilder: (context, str, _) {
+            return BlocListener<LoginCodeCubit, LoginCodeState>(
+              listener: (context, state) {
+                state.maybeWhen(
+                  orElse: () {},
+                  loading: () => isLoading.value = true,
+                  loaded: (user) {
+                    isLoading.value = false;
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => LoginPinScreen(),
+                      ),
+                    );
+                  },
+                  failed: (error) {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => LoginPinScreen(),
+                      ),
+                    );
+                    // isLoading.value = false;
+                    // AppToasts().showBottomToast(error, context, true);
+                  },
+                );
+              },
+              child: CustomButton(
                 text: "Далее",
                 isDisabled: false,
-                onPressed: () => Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => LoginPinScreen(),
-                  ),
-                ),
+                loading: isLoading.value,
+                onPressed: () {
+                  FocusScope.of(context).unfocus();
+                  BlocProvider.of<LoginCodeCubit>(context).verifyCode(
+                    phoneNumber: widget.phoneNumber
+                        .replaceAll('(', '')
+                        .replaceAll(')', '')
+                        .replaceAll(' ', ''),
+                    code: widget.code,
+                  );
+                },
                 backgroundColor: Styles.brandBlue,
-              );
-            }),
+              ),
+            );
+          },
+        ),
         SizedBox(height: 32),
       ],
     );
@@ -82,12 +121,12 @@ class _CodePhoneFormState extends State<CodePhoneForm> {
 
   //   await firebaseAuth.signInWithCredential(credential).whenComplete(
   //     () {
-  //       Navigator.pushReplacement(
-  //         context,
-  //         MaterialPageRoute(
-  //           builder: (context) => LoginPinScreen(),
-  //         ),
-  //       );
+  // Navigator.pushReplacement(
+  //   context,
+  //   MaterialPageRoute(
+  //     builder: (context) => LoginPinScreen(),
+  //   ),
+  // );
   //     },
   //   );
   // }

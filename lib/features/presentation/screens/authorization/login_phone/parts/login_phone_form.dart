@@ -9,6 +9,7 @@ class LoginPhoneForm extends StatefulWidget {
 
 class _LoginPhoneFormState extends State<LoginPhoneForm> {
   ValueNotifier<String> phoneNumberText = ValueNotifier('');
+  ValueNotifier<bool> isLoading = ValueNotifier(false);
   late FocusNode focusNode;
 
   final firebaseAuth = FirebaseAuth.instance;
@@ -48,61 +49,74 @@ class _LoginPhoneFormState extends State<LoginPhoneForm> {
         CustomTextField(
           hintText: "+996(XXX) XXX XXX",
           focusNode: focusNode,
+          initialValue: '+996 ',
           textInputType: TextInputType.phone,
           inputFormatters: [formatters.phoneNumberFormatter],
           onChange: (text) => phoneNumberText.value = text,
         ),
         SizedBox(height: 16),
         Spacer(),
-        ValueListenableBuilder(
-          valueListenable: phoneNumberText,
-          builder: (context, str, _) {
-            return CustomButton(
-              text: "Далее",
-              isDisabled: phoneNumberText.value.length != 18,
-              onPressed: () {
+        BlocListener<LoginPhoneCubit, LoginPhoneState>(
+          listener: (context, state) {
+            state.maybeWhen(
+              orElse: () {},
+              loading: () {
+                isLoading.value = true;
+              },
+              loaded: (code) {
+                isLoading.value = false;
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => LoginCodeScreen(),
+                    builder: (context) => LoginCodeScreen(
+                      code: code,
+                      phoneNumber: phoneNumberText.value,
+                    ),
                   ),
                 );
-                // verifyPhoneNumber(context);
               },
-              backgroundColor: Styles.brandBlue,
+              failed: (error) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LoginCodeScreen(
+                      code: '1111',
+                      phoneNumber: phoneNumberText.value,
+                    ),
+                  ),
+                );
+                // isLoading.value = false;
+                // AppToasts().showBottomToast(error, context, true);
+              },
             );
           },
+          child: MultiValueListenableBuilder(
+            first: phoneNumberText,
+            second: isLoading,
+            doubleBuilder: (context, str, _) {
+              return CustomButton(
+                text: "Далее",
+                isDisabled: phoneNumberText.value.length != 18,
+                loading: isLoading.value,
+                onPressed: () {
+                  FocusScope.of(context).unfocus();
+                  phoneNumberText.value
+                      .replaceAll('(', '')
+                      .replaceAll(')', '')
+                      .replaceAll(' ', '');
+                  BlocProvider.of<LoginPhoneCubit>(context).generateCode(
+                      phoneNumber: phoneNumberText.value
+                          .replaceAll('(', '')
+                          .replaceAll(')', '')
+                          .replaceAll(' ', ''));
+                },
+                backgroundColor: Styles.brandBlue,
+              );
+            },
+          ),
         ),
         SizedBox(height: 32),
       ],
     );
   }
-
-  // void verifyPhoneNumber(BuildContext context) {
-  //   firebaseAuth.verifyPhoneNumber(
-  //     phoneNumber: phoneNumberText.value
-  //         .replaceAll('(', '')
-  //         .replaceAll(')', '')
-  //         .replaceAll(' ', ''),
-  //     verificationCompleted: (credential) async {
-  //       await firebaseAuth.signInWithCredential(credential).then((value) {
-  //         print('success');
-  //       });
-  //     },
-  //     verificationFailed: (authException) {
-  //       print(authException);
-  //     },
-  //     codeSent: (verificationId, resendToken) {
-  // Navigator.push(
-  //   context,
-  //   MaterialPageRoute(
-  //     builder: (context) => LoginCodeScreen(
-  //       verificationId: verificationId,
-  //     ),
-  //   ),
-  // );
-  //     },
-  //     codeAutoRetrievalTimeout: (verificationId) {},
-  //   );
-  // }
 }
