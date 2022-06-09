@@ -21,6 +21,7 @@ class CustomTextField extends StatefulWidget {
   final String? label;
   final String? initialValue;
   final bool hasNext;
+  final int? maxLength;
 
   const CustomTextField({
     Key? key,
@@ -42,6 +43,7 @@ class CustomTextField extends StatefulWidget {
     this.initialValue,
     this.hasNext = false,
     this.onSubmitted,
+    this.maxLength,
   }) : super(key: key);
 
   @override
@@ -56,23 +58,26 @@ class _CustomTextFieldState extends State<CustomTextField> {
       obscureText: widget.obscureeText,
       focusNode: widget.focusNode,
       textInputAction:
-          widget.hasNext ? TextInputAction.unspecified : TextInputAction.done,
+          widget.hasNext ? TextInputAction.next : TextInputAction.done,
       onFieldSubmitted: widget.onSubmitted != null
           ? (text) => widget.onSubmitted!(text)
           : null,
       initialValue: widget.initialValue,
       keyboardType: widget.textInputType,
       controller: widget.controller,
+      textCapitalization: TextCapitalization.words,
       cursorColor: Styles.brandBlue,
       enabled: widget.enabled,
       inputFormatters: widget.inputFormatters,
+      maxLength: widget.maxLength,
       decoration: InputDecoration(
+        counterStyle: Styles.ts12(Styles.white),
         suffixIcon: widget.suffixIcon,
         prefixIcon: widget.icon,
         hintText: widget.hintText,
         labelText: widget.label,
         labelStyle: Styles.ts16(Styles.white.withOpacity(0.5)),
-        hintStyle: TextStyle(color: Colors.grey),
+        hintStyle: TextStyle(color: Colors.white),
         fillColor: widget.fillColor,
         filled: widget.filled,
         enabledBorder: UnderlineInputBorder(
@@ -88,6 +93,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
         focusedBorder: UnderlineInputBorder(
             borderSide: BorderSide(
           color: Styles.white,
+          width: widget.underlineWidth,
+        )),
+        disabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+          color: Styles.white.withOpacity(0.4),
           width: widget.underlineWidth,
         )),
       ),

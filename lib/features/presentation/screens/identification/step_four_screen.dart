@@ -1,19 +1,35 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:wallet_ui/core/styles.dart';
+import 'package:wallet_ui/features/data/models/user/register_user_model.dart';
+import 'package:wallet_ui/features/presentation/cubits/register_user/register_user_cubit/register_user_cubit.dart';
 import 'package:wallet_ui/features/presentation/screens/identification/components/photo_container.dart';
+import 'package:wallet_ui/features/presentation/screens/identification/register_success_screen.dart';
+import 'package:wallet_ui/features/presentation/widgets/app_toasts.dart';
 import 'package:wallet_ui/features/presentation/widgets/custom_button.dart';
 import 'package:wallet_ui/features/presentation/widgets/scale_animated_container.dart';
+import 'package:wallet_ui/service_locator.dart';
 
 class StepFourScreen extends StatefulWidget {
-  const StepFourScreen({Key? key}) : super(key: key);
+  final RegisterUserModel registerUserModel;
+  const StepFourScreen({Key? key, required this.registerUserModel})
+      : super(key: key);
 
   @override
   _StepFourScreenState createState() => _StepFourScreenState();
 }
 
 class _StepFourScreenState extends State<StepFourScreen> {
+  late RegisterUserModel _registerUserModel;
+  final registerCubit = sl<RegisterUserCubit>();
+  @override
+  void initState() {
+    _registerUserModel = widget.registerUserModel;
+    super.initState();
+  }
+
   XFile? front;
   XFile? back;
   XFile? selfie;
@@ -140,10 +156,41 @@ class _StepFourScreenState extends State<StepFourScreen> {
               ),
               SizedBox(height: 14),
               Spacer(),
-              CustomButton(
-                text: "Готово",
-                onPressed: () {},
-                backgroundColor: Styles.backgroundColor2,
+              BlocProvider.value(
+                value: registerCubit,
+                child: BlocListener<RegisterUserCubit, RegisterUserState>(
+                  listener: (context, state) {
+                    state.maybeWhen(
+                      orElse: () {},
+                      failed: (e) {
+                        AppToasts().showBottomToast(e, context, true);
+                      },
+                      loaded: (user) {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => RegisterSuccessScreen()),
+                            (route) => false);
+                      },
+                    );
+                  },
+                  child: CustomButton(
+                    text: "Готово",
+                    onPressed: () {
+                      _registerUserModel.tipDokumenta = 'Паспорт';
+                      _registerUserModel.nomerPasporta = 'nomerPasporta';
+                      _registerUserModel.dataVydaciPasporta =
+                          'dataVydaciPasporta';
+                      _registerUserModel.organVydaciPasporta =
+                          'organVydaciPasporta';
+                      _registerUserModel.organVydaciPasporta =
+                          'organVydaciPasporta';
+                      _registerUserModel.email = 'email';
+                      registerCubit.registerUser(_registerUserModel);
+                    },
+                    backgroundColor: Styles.backgroundColor2,
+                  ),
+                ),
               ),
               SizedBox(height: 30)
             ],

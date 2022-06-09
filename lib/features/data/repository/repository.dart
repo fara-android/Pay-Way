@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:wallet_ui/features/data/data_sources/api_data_source/history_payments_api.dart';
 import 'package:wallet_ui/features/data/data_sources/api_data_source/login_api.dart';
 import 'package:wallet_ui/features/data/data_sources/api_data_source/login_email_api.dart';
+import 'package:wallet_ui/features/data/data_sources/api_data_source/register_api.dart';
 import 'package:wallet_ui/features/data/data_sources/api_data_source/transfer_money_api.dart';
 import 'package:wallet_ui/features/data/data_sources/api_data_source/user_api.dart';
 import 'package:wallet_ui/features/data/data_sources/helpers/dio_settings.dart';
@@ -14,6 +15,7 @@ class Repository {
     transferMoneyApi = TransferMoneyApi(dio: _dio);
     userApi = UserApi(dio: _dio);
     loginApi = LoginApi(dio: _dio);
+    registerUserApi = RegisterUserApi(dio: _dio);
   }
 
   late Dio _dio;
@@ -22,6 +24,7 @@ class Repository {
   late TransferMoneyApi transferMoneyApi;
   late UserApi userApi;
   late LoginApi loginApi;
+  late RegisterUserApi registerUserApi;
 }
 
 Dio _getDio() {

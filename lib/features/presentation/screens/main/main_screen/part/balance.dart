@@ -28,7 +28,7 @@ class Balance extends StatelessWidget {
           ),
           loaded: (user) => Countup(
             begin: 0,
-            end: user.data?.wallets?[0].balance ?? 0,
+            end: 0,
             duration: Duration(seconds: 1),
             precision: 2,
             style: TextStyle(
@@ -42,34 +42,5 @@ class Balance extends StatelessWidget {
         );
       },
     );
-    // return Text.rich(
-    //   TextSpan(
-    //     children: [
-    // TextSpan(
-    //   text: '694,',
-    // style: TextStyle(
-    //     fontSize: 48,
-    //     fontWeight: FontWeight.w700,
-    //     color: Styles.textColor),
-    // ),
-    // TextSpan(
-    //   text: '44 ',
-    // style: TextStyle(
-    //     fontSize: 48,
-    //     fontWeight: FontWeight.w100,
-    //     color: Styles.textColor),
-    // ),
-    // TextSpan(
-    //   text: 'С',
-    //   style: TextStyle(
-    //     fontSize: 48,
-    //     fontWeight: FontWeight.w100,
-    //     color: Styles.textColor,
-    //     decoration: TextDecoration.underline,
-    //   ),
-    // ),
-    //     ],
-    //   ),
-    // );
   }
 }

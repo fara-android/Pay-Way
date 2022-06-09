@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:wallet_ui/core/styles.dart';
+import 'package:wallet_ui/features/data/models/user/register_user_model.dart';
 import 'package:wallet_ui/features/presentation/screens/identification/step_two_screen.dart';
+import 'package:wallet_ui/features/presentation/widgets/app_toasts.dart';
 import 'package:wallet_ui/features/presentation/widgets/custom_button.dart';
 import 'package:wallet_ui/features/presentation/widgets/custom_text_field.dart';
 
@@ -12,6 +14,30 @@ class StepOneScreen extends StatefulWidget {
 }
 
 class _StepOneScreenState extends State<StepOneScreen> {
+  late TextEditingController firstNameController,
+      lastNameController,
+      fatherNameController,
+      innController;
+  final RegisterUserModel _registerUserModel = RegisterUserModel();
+
+  @override
+  void initState() {
+    firstNameController = TextEditingController();
+    lastNameController = TextEditingController();
+    fatherNameController = TextEditingController();
+    innController = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    firstNameController.dispose();
+    lastNameController.dispose();
+    fatherNameController.dispose();
+    innController.dispose();
+    super.dispose();
+  }
+
   final passportType = ValueNotifier(0);
   @override
   Widget build(BuildContext context) {
@@ -44,16 +70,19 @@ class _StepOneScreenState extends State<StepOneScreen> {
               SizedBox(height: 32),
               CustomTextField(
                 label: "Фамилия ",
+                controller: lastNameController,
                 hasNext: true,
               ),
               SizedBox(height: 4),
               CustomTextField(
                 label: "Имя ",
                 hasNext: true,
+                controller: firstNameController,
               ),
               SizedBox(height: 4),
               CustomTextField(
                 label: "Отчество ",
+                controller: fatherNameController,
               ),
               SizedBox(height: 16),
               Text(
@@ -140,7 +169,10 @@ class _StepOneScreenState extends State<StepOneScreen> {
                 builder: (str, _, __) {
                   return passportType.value == 0
                       ? CustomTextField(
+                          controller: innController,
                           label: "ИНН ",
+                          textInputType: TextInputType.number,
+                          maxLength: 14,
                           onSubmitted: (text) {},
                         )
                       : Text(
@@ -151,29 +183,45 @@ class _StepOneScreenState extends State<StepOneScreen> {
               ),
               SizedBox(height: 16),
               ValueListenableBuilder(
-                  valueListenable: passportType,
-                  builder: (context, _, __) {
-                    return SizedBox(
-                      child: passportType.value == 0
-                          ? CustomButton(
-                              text: "Далее",
-                              onPressed: () {
+                valueListenable: passportType,
+                builder: (context, _, __) {
+                  return SizedBox(
+                    child: passportType.value == 0
+                        ? CustomButton(
+                            text: "Далее",
+                            onPressed: () {
+                              if (firstNameController.text.isNotEmpty &&
+                                  lastNameController.text.isEmpty &&
+                                  innController.text.isEmpty) {
+                                FocusScope.of(context).unfocus();
+                                AppToasts().showBottomToast(
+                                  'Пожалуйста заполните все поля',
+                                  context,
+                                  true,
+                                );
+                              } else {
+                                _registerUserModel.fio =
+                                    '${lastNameController.text} ${firstNameController.text} ${fatherNameController.text}';
+                                _registerUserModel.inn = innController.text;
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => StepTwoScreen(),
+                                    builder: (context) => StepTwoScreen(
+                                        registerUserModel: _registerUserModel),
                                   ),
                                 );
-                              },
-                              backgroundColor: Styles.backgroundColor2,
-                            )
-                          : CustomButton(
-                              text: "Ближайшие филлиалы",
-                              onPressed: () {},
-                              backgroundColor: Styles.backgroundColor2,
-                            ),
-                    );
-                  }),
+                              }
+                            },
+                            backgroundColor: Styles.backgroundColor2,
+                          )
+                        : CustomButton(
+                            text: "Ближайшие филлиалы",
+                            onPressed: () {},
+                            backgroundColor: Styles.backgroundColor2,
+                          ),
+                  );
+                },
+              ),
               SizedBox(height: 30)
             ],
           ),

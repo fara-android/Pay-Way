@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:wallet_ui/core/app_error.dart';
+import 'package:wallet_ui/features/data/models/user/user_model.dart';
 import 'package:wallet_ui/features/domain/repositories/auth/repo_login.dart';
 import 'package:wallet_ui/core/extensions/object.dart';
 
@@ -12,14 +13,8 @@ class LoginApi {
     required String phoneNumber,
   }) async {
     try {
-      final response = await dio.post(
-        'auth/login',
-        // queryParameters: {
-        //   'email': email,
-        //   'password': password,
-        //   'remember': 0,
-        // },
-      );
+      final response =
+          await dio.post('auth/generateCode', data: {'phone': phoneNumber});
 
       return RepoLoginPhoneResult(code: response.data['code']);
     } catch (error) {
@@ -34,16 +29,12 @@ class LoginApi {
     required String code,
   }) async {
     try {
-      final response = await dio.post(
-        'auth/login',
-        // queryParameters: {
-        //   'email': email,
-        //   'password': password,
-        //   'remember': 0,
-        // },
-      );
+      final response = await dio.post('auth/generateCode', data: {
+        'phone': phoneNumber,
+        'code': code,
+      });
 
-      return RepoLoginCodeResult(code: response.data['code']);
+      return RepoLoginCodeResult(user: UserModel.fromJson(response.data));
     } catch (error) {
       return RepoLoginCodeResult(
         error: AppError(message: error.dioErrorMessage),

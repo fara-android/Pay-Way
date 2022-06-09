@@ -69,24 +69,14 @@ class _LoginPhoneFormState extends State<LoginPhoneForm> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => LoginCodeScreen(
-                      code: code,
                       phoneNumber: phoneNumberText.value,
                     ),
                   ),
                 );
               },
               failed: (error) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => LoginCodeScreen(
-                      code: '1111',
-                      phoneNumber: phoneNumberText.value,
-                    ),
-                  ),
-                );
-                // isLoading.value = false;
-                // AppToasts().showBottomToast(error, context, true);
+                isLoading.value = false;
+                AppToasts().showBottomToast(error, context, true);
               },
             );
           },

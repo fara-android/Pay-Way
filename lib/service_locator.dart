@@ -3,18 +3,21 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wallet_ui/features/data/repository/history_payments_repository.dart';
 import 'package:wallet_ui/features/data/repository/login_email_repository.dart';
 import 'package:wallet_ui/features/data/repository/login_repository.dart';
+import 'package:wallet_ui/features/data/repository/register_user_repository.dart';
 import 'package:wallet_ui/features/data/repository/repository.dart';
 import 'package:wallet_ui/features/data/repository/transfer_money_repository.dart';
 import 'package:wallet_ui/features/data/repository/user_repository.dart';
 import 'package:wallet_ui/features/domain/repositories/auth/repo_login.dart';
 import 'package:wallet_ui/features/domain/repositories/repo_auth/repo_auth.dart';
 import 'package:wallet_ui/features/domain/repositories/repo_history_payments/repo_history_payments.dart';
+import 'package:wallet_ui/features/domain/repositories/repo_register/repo_register.dart';
 import 'package:wallet_ui/features/domain/repositories/repo_transfer_money/repo_transfer_money.dart';
 import 'package:wallet_ui/features/domain/repositories/user/repo_user.dart';
 import 'package:wallet_ui/features/domain/usecases/auth/login_case.dart';
 import 'package:wallet_ui/features/domain/usecases/auth/login_email_case.dart';
 import 'package:wallet_ui/features/domain/usecases/auth/login_pin_case.dart';
 import 'package:wallet_ui/features/domain/usecases/history/history_payments_case.dart';
+import 'package:wallet_ui/features/domain/usecases/register_user/register_user_case.dart';
 import 'package:wallet_ui/features/domain/usecases/transfer_money/transfer_money_case.dart';
 import 'package:wallet_ui/features/domain/usecases/user/user_case.dart';
 import 'package:wallet_ui/features/presentation/cubits/auth/login_code_cubit/login_code_cubit.dart';
@@ -23,6 +26,7 @@ import 'package:wallet_ui/features/presentation/cubits/auth/login_phone_cubit/lo
 import 'package:wallet_ui/features/presentation/cubits/auth/login_pin_cubit/login_pin_cubit.dart';
 import 'package:wallet_ui/features/presentation/cubits/history/history_payments_cubit/history_payments_cubit.dart';
 import 'package:wallet_ui/features/presentation/cubits/main_screen/user_cubit/user_cubit.dart';
+import 'package:wallet_ui/features/presentation/cubits/register_user/register_user_cubit/register_user_cubit.dart';
 import 'package:wallet_ui/features/presentation/cubits/transfer/cubit/transfer_money_cubit.dart';
 
 final sl = GetIt.instance;
@@ -53,6 +57,9 @@ Future<void> init() async {
   );
   sl.registerLazySingleton<RepoUser>(
     () => UserRepository(repository: sl()),
+  );
+  sl.registerLazySingleton<RepoUserRegister>(
+    () => RegisterUserRepository(repository: sl()),
   );
 
   // UseCases
@@ -91,6 +98,9 @@ Future<void> init() async {
       repository: sl(),
     ),
   );
+  sl.registerLazySingleton<RegisterUserCase>(
+    () => RegisterUserCase(repository: sl()),
+  );
 
   // BLoC / Cubit
   sl.registerFactory<LoginPinCubit>(
@@ -125,5 +135,8 @@ Future<void> init() async {
   );
   sl.registerFactory<UserCubit>(
     () => UserCubit(userCase: sl()),
+  );
+  sl.registerFactory<RegisterUserCubit>(
+    () => RegisterUserCubit(registerUserCase: sl()),
   );
 }

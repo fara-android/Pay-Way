@@ -4,13 +4,13 @@ class UserModel {
   UserModel({this.data});
 
   UserModel.fromJson(Map<String, dynamic> json) {
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    data = json['user'] != null ? new Data.fromJson(json['user']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.data != null) {
-      data['data'] = this.data!.toJson();
+      data['user'] = this.data!.toJson();
     }
     return data;
   }
@@ -26,8 +26,6 @@ class Data {
   int? status;
   int? emailVerified;
   int? kycStatus;
-  List<Transactions>? transactions;
-  List<Wallets>? wallets;
   String? createdAt;
 
   Data(
@@ -40,8 +38,6 @@ class Data {
       this.status,
       this.emailVerified,
       this.kycStatus,
-      this.transactions,
-      this.wallets,
       this.createdAt});
 
   Data.fromJson(Map<String, dynamic> json) {
@@ -54,18 +50,6 @@ class Data {
     status = json['status'];
     emailVerified = json['email_verified'];
     kycStatus = json['kyc_status'];
-    if (json['transactions'] != null) {
-      transactions = <Transactions>[];
-      json['transactions'].forEach((v) {
-        transactions!.add(new Transactions.fromJson(v));
-      });
-    }
-    if (json['wallets'] != null) {
-      wallets = <Wallets>[];
-      json['wallets'].forEach((v) {
-        wallets!.add(new Wallets.fromJson(v));
-      });
-    }
     createdAt = json['created_at'];
   }
 
@@ -80,12 +64,6 @@ class Data {
     data['status'] = this.status;
     data['email_verified'] = this.emailVerified;
     data['kyc_status'] = this.kycStatus;
-    if (this.transactions != null) {
-      data['transactions'] = this.transactions!.map((v) => v.toJson()).toList();
-    }
-    if (this.wallets != null) {
-      data['wallets'] = this.wallets!.map((v) => v.toJson()).toList();
-    }
     data['created_at'] = this.createdAt;
     return data;
   }

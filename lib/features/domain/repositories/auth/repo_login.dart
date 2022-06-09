@@ -1,4 +1,5 @@
 import 'package:wallet_ui/core/app_error.dart';
+import 'package:wallet_ui/features/data/models/user/user_model.dart';
 
 abstract class RepoLogin {
   Future<RepoLoginPhoneResult> generateCode({required String phoneNumber});
@@ -23,13 +24,13 @@ class RepoLoginPhoneResult {
 
 class RepoLoginCodeResult {
   final AppError? error;
-  final String? code;
+  final UserModel? user;
 
   RepoLoginCodeResult({
     this.error,
-    this.code,
+    this.user,
   });
 
   @override
-  String toString() => 'RepoAuthResult(error: $error, result: $code)';
+  String toString() => 'RepoAuthResult(error: $error, result: $user)';
 }

@@ -4,7 +4,7 @@ import 'package:wallet_ui/core/styles.dart';
 class CustomDateTimePicker extends StatefulWidget {
   final String title;
   final Color backgroundColor;
-  final Function onChose;
+  final Function(DateTime) onChose;
   CustomDateTimePicker({
     Key? key,
     required this.title,

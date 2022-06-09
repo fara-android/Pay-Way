@@ -110,7 +110,8 @@ class _AcceptTransferScreenState extends State<AcceptTransferScreen> {
                                 ),
                               ),
                               Text(
-                                '${user.data?.wallets?.first.balance} сом',
+                                // '${user.data?.wallets?.first.balance} сом',
+                                '0',
                                 style: Styles.ts18(
                                   Styles.white,
                                   fontWeight: FontWeight.w700,

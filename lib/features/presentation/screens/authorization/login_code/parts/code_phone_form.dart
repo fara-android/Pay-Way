@@ -2,11 +2,10 @@ part of '../code_phone_screen.dart';
 
 class CodePhoneForm extends StatefulWidget {
   final String phoneNumber;
-  final String code;
+
   CodePhoneForm({
     Key? key,
     required this.phoneNumber,
-    required this.code,
   }) : super(key: key);
 
   @override
@@ -53,7 +52,7 @@ class _CodePhoneFormState extends State<CodePhoneForm> {
           style: Styles.ts12(Styles.textColor2, fontWeight: FontWeight.w400),
         ),
         CustomTextField(
-          hintText: "xxxxxx",
+          hintText: "****",
           focusNode: focusNode,
           textInputType: TextInputType.phone,
           inputFormatters: [formatters.pinFormatter],
@@ -71,8 +70,10 @@ class _CodePhoneFormState extends State<CodePhoneForm> {
                   orElse: () {},
                   loading: () => isLoading.value = true,
                   loaded: (user) {
+                    final prefs = sl<SharedPreferences>();
+                    prefs.setString('phone', user.data?.phone ?? '');
                     isLoading.value = false;
-                    Navigator.pushReplacement(
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => LoginPinScreen(),
@@ -80,29 +81,24 @@ class _CodePhoneFormState extends State<CodePhoneForm> {
                     );
                   },
                   failed: (error) {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => LoginPinScreen(),
-                      ),
-                    );
-                    // isLoading.value = false;
-                    // AppToasts().showBottomToast(error, context, true);
+                    isLoading.value = false;
+                    AppToasts().showBottomToast(error, context, true);
                   },
                 );
               },
               child: CustomButton(
                 text: "Далее",
-                isDisabled: false,
+                isDisabled: codeText.value.length != 4,
                 loading: isLoading.value,
                 onPressed: () {
                   FocusScope.of(context).unfocus();
+
                   BlocProvider.of<LoginCodeCubit>(context).verifyCode(
                     phoneNumber: widget.phoneNumber
                         .replaceAll('(', '')
                         .replaceAll(')', '')
                         .replaceAll(' ', ''),
-                    code: widget.code,
+                    code: codeText.value,
                   );
                 },
                 backgroundColor: Styles.brandBlue,

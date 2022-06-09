@@ -29,8 +29,7 @@ class LoginRepository extends RepoLogin {
         .verifyCode(phoneNumber: phoneNumber, code: code);
 
     if (response.error == null) {
-      // TODO
-      return RepoLoginCodeResult(code: response.code);
+      return RepoLoginCodeResult(user: response.user);
     }
 
     return RepoLoginCodeResult(

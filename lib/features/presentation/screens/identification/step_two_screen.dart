@@ -1,17 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:wallet_ui/core/styles.dart';
+import 'package:wallet_ui/features/data/models/user/register_user_model.dart';
 import 'package:wallet_ui/features/presentation/screens/identification/step_three_screen.dart';
+import 'package:wallet_ui/features/presentation/widgets/app_toasts.dart';
 import 'package:wallet_ui/features/presentation/widgets/custom_button.dart';
 import 'package:wallet_ui/features/presentation/widgets/custom_drop_down_button.dart';
 import 'package:wallet_ui/features/presentation/widgets/custom_text_field.dart';
 
-class StepTwoScreen extends StatelessWidget {
-  const StepTwoScreen({Key? key}) : super(key: key);
+class StepTwoScreen extends StatefulWidget {
+  final RegisterUserModel registerUserModel;
+  const StepTwoScreen({Key? key, required this.registerUserModel})
+      : super(key: key);
+
+  @override
+  State<StepTwoScreen> createState() => _StepTwoScreenState();
+}
+
+class _StepTwoScreenState extends State<StepTwoScreen> {
+  late TextEditingController ulicaController, domController, kvartiraController;
+  late RegisterUserModel _registerUserModel;
+
+  @override
+  void initState() {
+    _registerUserModel = widget.registerUserModel;
+    ulicaController = TextEditingController();
+    domController = TextEditingController();
+    kvartiraController = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    ulicaController.dispose();
+    domController.dispose();
+    kvartiraController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: BackButton(color: Styles.white),
         elevation: 1,
         backgroundColor: Styles.backgroundColor,
         title: Text(
@@ -25,7 +55,6 @@ class StepTwoScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: ListView(
             physics: ClampingScrollPhysics(),
-            // crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: 14),
               Text(
@@ -34,7 +63,7 @@ class StepTwoScreen extends StatelessWidget {
               ),
               SizedBox(height: 48),
               DropDown(
-                items: ['sss', 'ads', 'asd'],
+                items: ['Кыргызстан'],
                 isExpanded: true,
                 hint: Text(
                   'Страна',
@@ -42,10 +71,13 @@ class StepTwoScreen extends StatelessWidget {
                     Styles.white.withOpacity(0.5),
                   ),
                 ),
+                onChanged: (value) {
+                  _registerUserModel.strana = value.toString();
+                },
               ),
               SizedBox(height: 16),
               DropDown(
-                items: ['sss', 'ads', 'asd'],
+                items: ['Чуйская'],
                 isExpanded: true,
                 hint: Text(
                   'Область',
@@ -53,10 +85,13 @@ class StepTwoScreen extends StatelessWidget {
                     Styles.white.withOpacity(0.5),
                   ),
                 ),
+                onChanged: (value) {
+                  _registerUserModel.oblast = value.toString();
+                },
               ),
               SizedBox(height: 16),
               DropDown(
-                items: ['sss', 'ads', 'asd'],
+                items: ['Бишкек'],
                 isExpanded: true,
                 hint: Text(
                   'Город/Село',
@@ -64,10 +99,13 @@ class StepTwoScreen extends StatelessWidget {
                     Styles.white.withOpacity(0.5),
                   ),
                 ),
+                onChanged: (value) {
+                  _registerUserModel.gorod = value.toString();
+                },
               ),
               SizedBox(height: 16),
               DropDown(
-                items: ['sss', 'ads', 'asd'],
+                items: ['Ленинский'],
                 isExpanded: true,
                 hint: Text(
                   'Район',
@@ -75,35 +113,72 @@ class StepTwoScreen extends StatelessWidget {
                     Styles.white.withOpacity(0.5),
                   ),
                 ),
+                onChanged: (value) {
+                  _registerUserModel.raion = value.toString();
+                },
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 2),
                 child: CustomTextField(
                   label: 'Улица',
+                  hasNext: true,
+                  onChange: (text) {
+                    setState(() {
+                      _registerUserModel.ulica = text;
+                    });
+                  },
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 2),
                 child: CustomTextField(
+                  onChange: (text) {
+                    setState(() {
+                      _registerUserModel.dom = text;
+                    });
+                  },
                   label: 'Дом',
+                  hasNext: true,
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 2),
                 child: CustomTextField(
                   label: 'Квартира',
+                  onChange: (text) {
+                    setState(() {
+                      _registerUserModel.kvartira = text;
+                    });
+                  },
                 ),
               ),
               SizedBox(height: 32),
               CustomButton(
                 text: "Далее",
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => StepThreeScreen(),
-                    ),
-                  );
+                  setState(() {});
+                  if (_registerUserModel.strana == null ||
+                      _registerUserModel.oblast == null ||
+                      _registerUserModel.gorod == null ||
+                      _registerUserModel.raion == null ||
+                      _registerUserModel.ulica == null ||
+                      _registerUserModel.dom == null) {
+                    FocusScope.of(context).unfocus();
+                    AppToasts().showBottomToast(
+                      'Пожалуйста заполните все поля',
+                      context,
+                      true,
+                    );
+                  } else {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => StepThreeScreen(
+                          registerUserModel: _registerUserModel,
+                        ),
+                      ),
+                    );
+                  }
                 },
                 backgroundColor: Styles.backgroundColor2,
               ),

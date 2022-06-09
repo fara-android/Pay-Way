@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wallet_ui/core/styles.dart';
 import 'package:wallet_ui/features/presentation/cubits/auth/login_code_cubit/login_code_cubit.dart';
 import 'package:wallet_ui/features/presentation/screens/authorization/login_pin/login_pin_screen.dart';
@@ -15,10 +16,9 @@ part 'parts/code_phone_form.dart';
 
 class LoginCodeScreen extends StatelessWidget {
   final String phoneNumber;
-  final String code;
+
   const LoginCodeScreen({
     Key? key,
-    required this.code,
     required this.phoneNumber,
   }) : super(key: key);
 
@@ -35,7 +35,6 @@ class LoginCodeScreen extends StatelessWidget {
             child: BlocProvider(
               create: (context) => sl<LoginCodeCubit>(),
               child: CodePhoneForm(
-                code: code,
                 phoneNumber: phoneNumber,
               ),
             ),
