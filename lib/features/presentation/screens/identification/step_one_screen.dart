@@ -17,7 +17,8 @@ class _StepOneScreenState extends State<StepOneScreen> {
   late TextEditingController firstNameController,
       lastNameController,
       fatherNameController,
-      innController;
+      innController,
+      passportController;
   final RegisterUserModel _registerUserModel = RegisterUserModel();
 
   @override
@@ -26,6 +27,7 @@ class _StepOneScreenState extends State<StepOneScreen> {
     lastNameController = TextEditingController();
     fatherNameController = TextEditingController();
     innController = TextEditingController();
+    passportController = TextEditingController();
     super.initState();
   }
 
@@ -35,6 +37,7 @@ class _StepOneScreenState extends State<StepOneScreen> {
     lastNameController.dispose();
     fatherNameController.dispose();
     innController.dispose();
+    passportController.dispose();
     super.dispose();
   }
 
@@ -181,6 +184,23 @@ class _StepOneScreenState extends State<StepOneScreen> {
                         );
                 },
               ),
+              ValueListenableBuilder(
+                valueListenable: passportType,
+                builder: (str, _, __) {
+                  return passportType.value == 0
+                      ? CustomTextField(
+                          controller: passportController,
+                          label: "Номер паспорта",
+                          textInputType: TextInputType.number,
+                          maxLength: 14,
+                          onSubmitted: (text) {},
+                        )
+                      : Text(
+                          'Текст предложения идентификации в одном из филлиалов (Заменить)',
+                          style: Styles.ts18(Styles.white),
+                        );
+                },
+              ),
               SizedBox(height: 16),
               ValueListenableBuilder(
                 valueListenable: passportType,
@@ -190,19 +210,24 @@ class _StepOneScreenState extends State<StepOneScreen> {
                         ? CustomButton(
                             text: "Далее",
                             onPressed: () {
+                              // print(passportController.text);
                               if (firstNameController.text.isNotEmpty &&
                                   lastNameController.text.isEmpty &&
-                                  innController.text.isEmpty) {
+                                  innController.text.isEmpty &&
+                                  passportController.text.isEmpty) {
                                 FocusScope.of(context).unfocus();
                                 AppToasts().showBottomToast(
                                   'Пожалуйста заполните все поля',
                                   context,
                                   true,
                                 );
-                              } else {
+                              }
+                              else {
                                 _registerUserModel.fio =
                                     '${lastNameController.text} ${firstNameController.text} ${fatherNameController.text}';
                                 _registerUserModel.inn = innController.text;
+                                _registerUserModel.nomerPasporta =
+                                    passportController.text;
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
