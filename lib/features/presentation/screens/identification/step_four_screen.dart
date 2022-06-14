@@ -178,14 +178,11 @@ class _StepFourScreenState extends State<StepFourScreen> {
                     text: "Готово",
                     onPressed: () {
                       _registerUserModel.tipDokumenta = 'Паспорт';
-                      _registerUserModel.nomerPasporta = 'nomerPasporta';
-                      _registerUserModel.dataVydaciPasporta =
-                          'dataVydaciPasporta';
-                      _registerUserModel.organVydaciPasporta =
-                          'organVydaciPasporta';
-                      _registerUserModel.organVydaciPasporta =
-                          'organVydaciPasporta';
-                      _registerUserModel.email = 'email';
+                      _registerUserModel.nomerPasporta = '1';
+                      _registerUserModel.dataVydaciPasporta = '1';
+                      _registerUserModel.organVydaciPasporta = '1';
+                      _registerUserModel.organVydaciPasporta = '1';
+                      _registerUserModel.email = 'sss';
                       registerCubit.registerUser(_registerUserModel);
                     },
                     backgroundColor: Styles.backgroundColor2,

@@ -75,7 +75,7 @@ class _StepThreeScreenState extends State<StepThreeScreen> {
               ),
               SizedBox(height: 12),
               DropDown(
-                items: ['Холост', 'В браке'],
+                items: ['Холост', ' В браке'],
                 isExpanded: true,
                 onChanged: (value) {
                   _registerUserModel.semeinoePolozenie = value.toString();
