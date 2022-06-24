@@ -183,6 +183,9 @@ class _StepOneScreenState extends State<StepOneScreen> {
                             ),
                             CustomTextField(
                               controller: passportController,
+                              inputFormatters: [
+                                UpperCaseTextFormatter(),
+                              ],
                               label: "Номер паспорта",
                               hintText: 'ID,AN',
                               onSubmitted: (text) {},
