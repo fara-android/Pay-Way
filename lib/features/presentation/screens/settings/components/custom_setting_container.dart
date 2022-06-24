@@ -5,12 +5,14 @@ class CustomSettingContainer extends StatelessWidget {
   final Widget icon;
   final String title;
   final Color iconContainerColor;
+  final Widget? attentionWidget;
   final Function() onTap;
   const CustomSettingContainer({
     Key? key,
     required this.icon,
     required this.title,
     required this.onTap,
+    this.attentionWidget,
     this.iconContainerColor = Styles.backgroundColor2,
   }) : super(key: key);
 
@@ -37,14 +39,19 @@ class CustomSettingContainer extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 12),
-                SizedBox(
-                  width: Styles.getWidth(context) / 1.4,
-                  child: Text(
-                    title,
-                    style: Styles.ts18(Styles.white),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
-                  ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: Styles.getWidth(context) / 1.6,
+                      child: Text(
+                        title,
+                        style: Styles.ts18(Styles.white),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                      ),
+                    ),
+                    attentionWidget ?? SizedBox()
+                  ],
                 ),
                 SizedBox(height: 12),
                 Container(
@@ -53,7 +60,7 @@ class CustomSettingContainer extends StatelessWidget {
                   color: Color(0xFF033144),
                 )
               ],
-            )
+            ),
           ],
         ),
       ),

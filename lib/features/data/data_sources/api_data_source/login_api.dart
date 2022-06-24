@@ -36,6 +36,7 @@ class LoginApi {
 
       return RepoLoginCodeResult(user: UserModel.fromJson(response.data));
     } catch (error) {
+      print(error);
       return RepoLoginCodeResult(
         error: AppError(message: error.dioErrorMessage),
       );

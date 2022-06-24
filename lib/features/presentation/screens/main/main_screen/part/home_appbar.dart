@@ -46,7 +46,7 @@ class HomeAppBar extends StatelessWidget {
               Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => LoginEmailScreen(),
+                    builder: (context) => LoginPhoneScreen(),
                   ),
                   (route) => false);
             },

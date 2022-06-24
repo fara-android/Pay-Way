@@ -17,13 +17,7 @@ class CustomDateTimePicker extends StatefulWidget {
 }
 
 class _CustomDateTimePickerState extends State<CustomDateTimePicker> {
-  late DateTime pickedDate;
-
-  @override
-  void initState() {
-    super.initState();
-    pickedDate = DateTime.now();
-  }
+  DateTime? pickedDate;
 
   @override
   Widget build(BuildContext context) {
@@ -42,10 +36,15 @@ class _CustomDateTimePickerState extends State<CustomDateTimePicker> {
             borderRadius: BorderRadius.circular(12),
           ),
           child: ListTile(
-            title: Text(
-              " ${pickedDate.day}.${pickedDate.month}.${pickedDate.year}.",
-              style: Styles.ts16(Styles.white),
-            ),
+            title: pickedDate != null
+                ? Text(
+                    " ${pickedDate!.day} / ${pickedDate!.month} / ${pickedDate!.year}",
+                    style: Styles.ts16(Styles.white),
+                  )
+                : Text(
+                    "Выберите дату",
+                    style: Styles.ts16(Styles.white),
+                  ),
             trailing: Icon(
               Icons.keyboard_arrow_down,
               color: Styles.white,
@@ -62,7 +61,7 @@ class _CustomDateTimePickerState extends State<CustomDateTimePicker> {
   _pickDate() async {
     DateTime? date = await showDatePicker(
       context: context,
-      initialDate: pickedDate,
+      initialDate: DateTime.now(),
       firstDate: DateTime(DateTime.now().year - 100),
       lastDate: DateTime.now(),
     );
@@ -70,7 +69,7 @@ class _CustomDateTimePickerState extends State<CustomDateTimePicker> {
     if (date != null) {
       setState(() {
         pickedDate = date;
-        widget.onChose(pickedDate);
+        widget.onChose(pickedDate!);
       });
     }
   }

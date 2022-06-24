@@ -171,29 +171,24 @@ class _StepOneScreenState extends State<StepOneScreen> {
                 valueListenable: passportType,
                 builder: (str, _, __) {
                   return passportType.value == 0
-                      ? CustomTextField(
-                          controller: innController,
-                          label: "ИНН ",
-                          textInputType: TextInputType.number,
-                          maxLength: 14,
-                          onSubmitted: (text) {},
-                        )
-                      : Text(
-                          'Текст предложения идентификации в одном из филлиалов (Заменить)',
-                          style: Styles.ts18(Styles.white),
-                        );
-                },
-              ),
-              ValueListenableBuilder(
-                valueListenable: passportType,
-                builder: (str, _, __) {
-                  return passportType.value == 0
-                      ? CustomTextField(
-                          controller: passportController,
-                          label: "Номер паспорта",
-                          textInputType: TextInputType.number,
-                          maxLength: 14,
-                          onSubmitted: (text) {},
+                      ? Column(
+                          children: [
+                            CustomTextField(
+                              controller: innController,
+                              label: "ИНН ",
+                              textInputType: TextInputType.number,
+                              maxLength: 14,
+                              hasNext: true,
+                              onSubmitted: (text) {},
+                            ),
+                            CustomTextField(
+                              controller: passportController,
+                              label: "Номер паспорта",
+                              hintText: 'ID,AN',
+                              onSubmitted: (text) {},
+                            ),
+                            SizedBox(height: 12),
+                          ],
                         )
                       : Text(
                           'Текст предложения идентификации в одном из филлиалов (Заменить)',
@@ -221,8 +216,7 @@ class _StepOneScreenState extends State<StepOneScreen> {
                                   context,
                                   true,
                                 );
-                              }
-                              else {
+                              } else {
                                 _registerUserModel.fio =
                                     '${lastNameController.text} ${firstNameController.text} ${fatherNameController.text}';
                                 _registerUserModel.inn = innController.text;

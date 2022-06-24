@@ -57,7 +57,12 @@ class _StepThreeScreenState extends State<StepThreeScreen> {
               SizedBox(height: 48),
               CustomTextField(
                 enabled: false,
-                hintText: _registerUserModel.mobilnyiTelefon,
+                label: _registerUserModel.mobilnyiTelefon,
+              ),
+              SizedBox(height: 12),
+              CustomTextField(
+                label: 'e-mail',
+                onChange: (value) => _registerUserModel.email = value,
               ),
               SizedBox(height: 12),
               DropDown(

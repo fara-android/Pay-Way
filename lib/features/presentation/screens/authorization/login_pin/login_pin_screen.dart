@@ -18,16 +18,13 @@ class LoginPinScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Styles.backgroundColor,
-      body: InkWell(
-        onTap: () => FocusScope.of(context).unfocus(),
-        child: BlocProvider(
-          create: (context) => sl<LoginPinCubit>(),
-          child: SafeArea(
-            child: Container(
-              height: Styles.getHeight(context),
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: LoginPinForm(),
-            ),
+      body: BlocProvider(
+        create: (context) => sl<LoginPinCubit>(),
+        child: SafeArea(
+          child: Container(
+            height: Styles.getHeight(context),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: LoginPinForm(),
           ),
         ),
       ),

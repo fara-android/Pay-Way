@@ -71,7 +71,7 @@ class _CodePhoneFormState extends State<CodePhoneForm> {
                   loading: () => isLoading.value = true,
                   loaded: (user) {
                     final prefs = sl<SharedPreferences>();
-                    prefs.setString('phone', user.data?.phone ?? '');
+                    prefs.setString('phone', user.user?.phone ?? '');
                     isLoading.value = false;
                     Navigator.push(
                       context,

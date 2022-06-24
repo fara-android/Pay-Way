@@ -1,3 +1,5 @@
+import 'package:image_picker/image_picker.dart';
+
 class RegisterUserModel {
   String? mobilnyiTelefon;
   String? fio;
@@ -17,31 +19,38 @@ class RegisterUserModel {
   String? kvartira;
   String? email;
   String? semeinoePolozenie;
+  XFile? passportFront;
+  XFile? passportBack;
+  XFile? passportSelfie;
 
-  RegisterUserModel(
-      {this.mobilnyiTelefon,
-      this.fio,
-      this.pol,
-      this.inn,
-      this.dataRozdeniya,
-      this.tipDokumenta,
-      this.nomerPasporta,
-      this.dataVydaciPasporta,
-      this.organVydaciPasporta,
-      this.strana,
-      this.oblast,
-      this.gorod,
-      this.raion,
-      this.ulica,
-      this.dom,
-      this.kvartira,
-      this.email,
-      this.semeinoePolozenie});
+  RegisterUserModel({
+    this.mobilnyiTelefon,
+    this.fio,
+    this.pol,
+    this.inn,
+    this.dataRozdeniya,
+    this.tipDokumenta,
+    this.nomerPasporta,
+    this.dataVydaciPasporta,
+    this.organVydaciPasporta,
+    this.strana,
+    this.oblast,
+    this.gorod,
+    this.raion,
+    this.ulica,
+    this.dom,
+    this.kvartira,
+    this.email,
+    this.semeinoePolozenie,
+    this.passportFront,
+    this.passportBack,
+    this.passportSelfie,
+  });
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['mobilnyi_telefon'] = this.mobilnyiTelefon;
-    data['fio'] = this.fio;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['mobilnyi_telefon'] = mobilnyiTelefon;
+    data['fio'] = fio;
     data['pol'] = this.pol;
     data['inn'] = this.inn;
     data['data_rozdeniya'] = this.dataRozdeniya;

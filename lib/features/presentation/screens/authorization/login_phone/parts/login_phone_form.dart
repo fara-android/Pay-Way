@@ -18,6 +18,7 @@ class _LoginPhoneFormState extends State<LoginPhoneForm> {
   void initState() {
     focusNode = FocusNode();
     focusNode.requestFocus();
+    print(phoneNumberText.value);
     super.initState();
   }
 

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wallet_ui/core/styles.dart';
 import 'package:wallet_ui/features/presentation/cubits/main_screen/user_cubit/user_cubit.dart';
+import 'package:wallet_ui/features/presentation/screens/authorization/login_phone/login_phone_screen.dart';
 import 'package:wallet_ui/features/presentation/screens/main/main_screen/components/custom_finance_container.dart';
 import 'package:wallet_ui/features/presentation/screens/main/main_screen/components/custom_form_top_up.dart';
 import 'package:wallet_ui/features/presentation/screens/main/main_screen/components/custom_message_container.dart';
@@ -28,9 +29,14 @@ part 'part/favorites.dart';
 part 'part/my_finance.dart';
 part 'part/ad_container.dart';
 
-class MainScreen extends StatelessWidget {
+class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
 
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

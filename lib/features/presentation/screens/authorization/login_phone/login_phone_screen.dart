@@ -20,15 +20,12 @@ class LoginPhoneScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Styles.backgroundColor,
-      body: InkWell(
-        onTap: () => FocusScope.of(context).unfocus(),
-        child: SafeArea(
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: BlocProvider(
-              create: (context) => sl<LoginPhoneCubit>(),
-              child: LoginPhoneForm(),
-            ),
+      body: SafeArea(
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: BlocProvider(
+            create: (context) => sl<LoginPhoneCubit>(),
+            child: LoginPhoneForm(),
           ),
         ),
       ),

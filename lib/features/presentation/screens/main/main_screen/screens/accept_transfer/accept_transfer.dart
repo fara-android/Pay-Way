@@ -89,7 +89,7 @@ class _AcceptTransferScreenState extends State<AcceptTransferScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            user.data?.name ?? '',
+                            user.user?.name ?? '',
                             style: Styles.ts18(
                               Styles.white,
                               fontWeight: FontWeight.w700,

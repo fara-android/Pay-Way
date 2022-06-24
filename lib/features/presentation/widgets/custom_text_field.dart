@@ -77,7 +77,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         hintText: widget.hintText,
         labelText: widget.label,
         labelStyle: Styles.ts16(Styles.white.withOpacity(0.5)),
-        hintStyle: TextStyle(color: Colors.white),
+        hintStyle: Styles.ts16(Styles.white.withOpacity(0.5)),
         fillColor: widget.fillColor,
         filled: widget.filled,
         enabledBorder: UnderlineInputBorder(

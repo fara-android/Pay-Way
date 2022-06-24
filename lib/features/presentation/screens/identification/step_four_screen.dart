@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,6 +25,7 @@ class StepFourScreen extends StatefulWidget {
 
 class _StepFourScreenState extends State<StepFourScreen> {
   late RegisterUserModel _registerUserModel;
+  final isLoading = ValueNotifier(false);
   final registerCubit = sl<RegisterUserCubit>();
   @override
   void initState() {
@@ -77,6 +80,7 @@ class _StepFourScreenState extends State<StepFourScreen> {
                               source: ImageSource.gallery);
                           setState(() {
                             front = _image;
+                            _registerUserModel.passportFront = _image;
                           });
                         },
                         onPhotoTap: () async {
@@ -84,6 +88,7 @@ class _StepFourScreenState extends State<StepFourScreen> {
                               source: ImageSource.camera);
                           setState(() {
                             front = _image;
+                            _registerUserModel.passportFront = _image;
                           });
                         },
                       );
@@ -105,6 +110,7 @@ class _StepFourScreenState extends State<StepFourScreen> {
                               source: ImageSource.gallery);
                           setState(() {
                             back = _image;
+                            _registerUserModel.passportBack = _image;
                           });
                         },
                         onPhotoTap: () async {
@@ -112,6 +118,7 @@ class _StepFourScreenState extends State<StepFourScreen> {
                               source: ImageSource.camera);
                           setState(() {
                             back = _image;
+                            _registerUserModel.passportBack = _image;
                           });
                         },
                       );
@@ -130,26 +137,15 @@ class _StepFourScreenState extends State<StepFourScreen> {
                         selfie = null;
                       });
                     },
-                    onTap: () {
-                      showModalSheet(
-                        context,
-                        onGalleryTap: () async {
-                          final _image = await _picker.pickImage(
-                              source: ImageSource.gallery);
-                          setState(() {
-                            selfie = _image;
-                          });
-                        },
-                        onPhotoTap: () async {
-                          final _image = await _picker.pickImage(
-                            source: ImageSource.camera,
-                            preferredCameraDevice: CameraDevice.front,
-                          );
-                          setState(() {
-                            selfie = _image;
-                          });
-                        },
+                    onTap: () async {
+                      final _image = await _picker.pickImage(
+                        source: ImageSource.camera,
+                        preferredCameraDevice: CameraDevice.front,
                       );
+                      setState(() {
+                        selfie = _image;
+                        _registerUserModel.passportSelfie = _image;
+                      });
                     },
                   ),
                 ],
@@ -162,10 +158,13 @@ class _StepFourScreenState extends State<StepFourScreen> {
                   listener: (context, state) {
                     state.maybeWhen(
                       orElse: () {},
+                      loading: () => isLoading.value = true,
                       failed: (e) {
                         AppToasts().showBottomToast(e, context, true);
+                        isLoading.value = false;
                       },
                       loaded: (user) {
+                        isLoading.value = false;
                         Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
@@ -174,18 +173,29 @@ class _StepFourScreenState extends State<StepFourScreen> {
                       },
                     );
                   },
-                  child: CustomButton(
-                    text: "Готово",
-                    onPressed: () {
-                      _registerUserModel.tipDokumenta = 'Паспорт';
-                      _registerUserModel.nomerPasporta = '1';
-                      _registerUserModel.dataVydaciPasporta = '1';
-                      _registerUserModel.organVydaciPasporta = '1';
-                      _registerUserModel.organVydaciPasporta = '1';
-                      _registerUserModel.email = 'sss';
-                      registerCubit.registerUser(_registerUserModel);
+                  child: ValueListenableBuilder(
+                    valueListenable: isLoading,
+                    builder: (context, str, _) {
+                      return CustomButton(
+                        loading: isLoading.value,
+                        text: "Готово",
+                        onPressed: () {
+                          if (_registerUserModel.passportFront != null &&
+                              _registerUserModel.passportBack != null) {
+                            _registerUserModel.tipDokumenta = 'Паспорт';
+                            _registerUserModel.nomerPasporta = '1';
+                            _registerUserModel.dataVydaciPasporta = '1';
+                            _registerUserModel.organVydaciPasporta = '1';
+                            _registerUserModel.organVydaciPasporta = '1';
+                            registerCubit.registerUser(_registerUserModel);
+                          } else {
+                            AppToasts().showBottomToast(
+                                'Заполните все поля', context, true);
+                          }
+                        },
+                        backgroundColor: Styles.backgroundColor2,
+                      );
                     },
-                    backgroundColor: Styles.backgroundColor2,
                   ),
                 ),
               ),
