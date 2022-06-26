@@ -178,14 +178,35 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       title: 'Выйти',
                       iconContainerColor: Styles.red,
                       onTap: () {
-                        final prefs = sl<SharedPreferences>();
-                        prefs.clear();
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => LoginPhoneScreen(),
-                            ),
-                            (route) => false);
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: Text("Выйти"),
+                            content: Text("Вы действительно хотите выйти?"),
+                            actions: <Widget>[
+                              FlatButton(
+                                onPressed: () {
+                                  final prefs = sl<SharedPreferences>();
+                                  prefs.clear();
+                                  Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            LoginPhoneScreen(),
+                                      ),
+                                      (route) => false);
+                                },
+                                child: Text("Дa"),
+                              ),
+                              FlatButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text("Закрыть"),
+                              )
+                            ],
+                          ),
+                        );
                       },
                     ),
                     SizedBox(height: 60),
