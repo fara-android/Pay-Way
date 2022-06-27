@@ -12,9 +12,12 @@ class _LoginPinFormState extends State<LoginPinForm> {
   ValueNotifier<bool> useBiometrics = ValueNotifier(false);
   late FocusNode focusNode;
   late LocalAuthentication localAuth;
+  late TextEditingController firstPinController, secondPincontroller;
 
   @override
   void initState() {
+    firstPinController = TextEditingController();
+    secondPincontroller = TextEditingController();
     focusNode = FocusNode();
     focusNode.requestFocus();
     localAuth = LocalAuthentication();
@@ -24,6 +27,8 @@ class _LoginPinFormState extends State<LoginPinForm> {
 
   @override
   void dispose() {
+    firstPinController.dispose();
+    secondPincontroller.dispose();
     focusNode.unfocus();
     super.dispose();
   }
@@ -52,6 +57,7 @@ class _LoginPinFormState extends State<LoginPinForm> {
         ),
         SizedBox(height: 12),
         CustomTextField(
+          controller: firstPinController,
           hintText: "xxxx",
           focusNode: focusNode,
           textInputType: TextInputType.number,
@@ -59,7 +65,24 @@ class _LoginPinFormState extends State<LoginPinForm> {
           onChange: (text) => pinText.value = text,
           obscureeText: true,
         ),
+        SizedBox(height: 12),
+        Text(
+          "Подтвердите PIN",
+          style: Styles.ts14(
+            Styles.textColor,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
         SizedBox(height: 16),
+        CustomTextField(
+          controller: secondPincontroller,
+          hintText: "xxxx",
+          focusNode: focusNode,
+          textInputType: TextInputType.number,
+          inputFormatters: [formatters.pinFormatter],
+          onChange: (text) => pinText.value = text,
+          obscureeText: true,
+        ),
         Spacer(),
         ValueListenableBuilder(
           valueListenable: pinText,
@@ -83,11 +106,20 @@ class _LoginPinFormState extends State<LoginPinForm> {
                 return CustomButton(
                   text: "Войти",
                   isDisabled: pinText.value.length != 4,
-                  onPressed: () =>
+                  onPressed: () {
+                    if (firstPinController.text == secondPincontroller.text) {
                       BlocProvider.of<LoginPinCubit>(context).savePinCode(
-                    pinCode: pinText.value,
-                    useAutenthication: useBiometrics.value,
-                  ),
+                        pinCode: pinText.value,
+                        useAutenthication: useBiometrics.value,
+                      );
+                    } else {
+                      FocusScope.of(context).unfocus();
+                      AppToasts().showBottomToast(
+                          "Пин не подтвержден, попробуйте еще раз!",
+                          context,
+                          true);
+                    }
+                  },
                   backgroundColor: Styles.brandBlue,
                 );
               },
@@ -129,3 +161,17 @@ class _LoginPinFormState extends State<LoginPinForm> {
     );
   }
 }
+
+
+//  if (firstPinController.text == secondPincontroller.text) {
+//                       Navigator.pushAndRemoveUntil(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => Menu(),
+//                         ),
+//                         (route) => false,
+//                       );
+//                     } else {
+//                       FocusScope.of(context).unfocus();
+//                       AppToasts().showBottomToast("Пин не подтвержден, попробуйте еще раз!", context, true);
+//                     }

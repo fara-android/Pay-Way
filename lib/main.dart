@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:wallet_ui/core/styles.dart';
+import 'package:wallet_ui/features/presentation/screens/authorization/login_pin/login_pin_screen.dart';
 import 'package:wallet_ui/features/presentation/screens/menu/menu.dart';
 import 'package:wallet_ui/features/presentation/screens/splash/splash_screen.dart';
 import 'package:wallet_ui/service_locator.dart' as di;
