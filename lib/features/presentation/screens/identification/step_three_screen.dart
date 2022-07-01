@@ -1,3 +1,4 @@
+import 'package:basic_utils/basic_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -25,17 +26,22 @@ class StepThreeScreen extends StatefulWidget {
 
 class _StepThreeScreenState extends State<StepThreeScreen> {
   late RegisterUserModel _registerUserModel;
-  late String dateOfInn;
-  late DateTime dateTimeOfInn;
+  late String dateFromInn;
 
   @override
   void initState() {
     _registerUserModel = widget.registerUserModel;
     _registerUserModel.mobilnyiTelefon =
         sl<SharedPreferences>().getString('phone');
-    dateOfInn = _registerUserModel.inn!.substring(1, 9);
-    dateTimeOfInn = DateTime.tryParse(dateOfInn) ?? DateTime.now();
-    print(dateTimeOfInn);
+
+    // dateFromInn =
+    dateFromInn = StringUtils.addCharAtPosition(
+        _registerUserModel.inn!.substring(1, 9), '/', 2);
+    dateFromInn = StringUtils.addCharAtPosition(dateFromInn, '/', 5);
+
+    print(dateFromInn);
+
+    // print(dateFromInn);
     super.initState();
   }
 
@@ -104,7 +110,7 @@ class _StepThreeScreenState extends State<StepThreeScreen> {
               CustomDateTimePicker(
                 title: 'Дата рождения',
                 backgroundColor: Color(0xFF022635),
-                initialDate: _registerUserModel.inn!,
+                initialDate: dateFromInn,
                 onChose: (date) {
                   _registerUserModel.dataRozdeniya =
                       '${date.day}-${date.month}-${date.year}';
