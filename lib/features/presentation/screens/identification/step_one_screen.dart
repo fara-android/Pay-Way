@@ -209,7 +209,7 @@ class _StepOneScreenState extends State<StepOneScreen> {
                             text: "Далее",
                             onPressed: () {
                               // print(passportController.text);
-                              if (firstNameController.text.isNotEmpty &&
+                              if (firstNameController.text.isEmpty &&
                                   lastNameController.text.isEmpty &&
                                   innController.text.isEmpty &&
                                   passportController.text.isEmpty) {

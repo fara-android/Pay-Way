@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
               SystemUiOverlayStyle(statusBarColor: Colors.transparent),
         ),
       ),
-      home: Menu(),
+      home: SplashScreen(),
     );
   }
 }

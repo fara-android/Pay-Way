@@ -162,7 +162,8 @@ class _StepTwoScreenState extends State<StepTwoScreen> {
                       _registerUserModel.gorod == null ||
                       _registerUserModel.raion == null ||
                       _registerUserModel.ulica == null ||
-                      _registerUserModel.dom == null) {
+                      _registerUserModel.dom == null ||
+                      _registerUserModel.kvartira == null) {
                     FocusScope.of(context).unfocus();
                     AppToasts().showBottomToast(
                       'Пожалуйста заполните все поля',

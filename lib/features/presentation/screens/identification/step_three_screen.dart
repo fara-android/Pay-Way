@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wallet_ui/core/styles.dart';
 import 'package:wallet_ui/features/data/models/user/register_user_model.dart';
@@ -12,6 +13,7 @@ import 'package:wallet_ui/service_locator.dart';
 
 class StepThreeScreen extends StatefulWidget {
   final RegisterUserModel registerUserModel;
+
   const StepThreeScreen({
     Key? key,
     required this.registerUserModel,
@@ -23,11 +25,17 @@ class StepThreeScreen extends StatefulWidget {
 
 class _StepThreeScreenState extends State<StepThreeScreen> {
   late RegisterUserModel _registerUserModel;
+  late String dateOfInn;
+  late DateTime dateTimeOfInn;
+
   @override
   void initState() {
     _registerUserModel = widget.registerUserModel;
     _registerUserModel.mobilnyiTelefon =
         sl<SharedPreferences>().getString('phone');
+    dateOfInn = _registerUserModel.inn!.substring(1, 9);
+    dateTimeOfInn = DateTime.tryParse(dateOfInn) ?? DateTime.now();
+    print(dateTimeOfInn);
     super.initState();
   }
 
@@ -96,6 +104,7 @@ class _StepThreeScreenState extends State<StepThreeScreen> {
               CustomDateTimePicker(
                 title: 'Дата рождения',
                 backgroundColor: Color(0xFF022635),
+                initialDate: _registerUserModel.inn!,
                 onChose: (date) {
                   _registerUserModel.dataRozdeniya =
                       '${date.day}-${date.month}-${date.year}';
