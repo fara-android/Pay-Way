@@ -18,7 +18,8 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   final _kycStatus = sl<SharedPreferences>().getInt('kyc_status');
   final _kycText = sl<SharedPreferences>().getString('kyc_text');
-
+  // final _kycStatus = 0;
+  // final _kycText = null;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,6 +65,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       onTap: () {},
                     ),
                     if (_kycStatus != 1)
+                      // if (_kycStatus != 2 && _kycText != null)
                       Column(
                         children: [
                           SizedBox(height: 16),
@@ -74,56 +76,112 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             ),
                             title: 'Идентификация пользователя',
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => StepOneScreen(),
-                                ),
-                              );
-                            },
-                            attentionWidget: _kycStatus != null
-                                ? InkWell(
-                                    onTap: () {
-                                      showModalBottomSheet(
-                                        context: context,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                        ),
-                                        builder: (context) {
-                                          return Container(
-                                            padding: EdgeInsets.symmetric(
-                                              horizontal: 16,
+                              print(_kycStatus);
+                              if (_kycStatus == 2 && _kycText == null) {
+                                showModalBottomSheet(
+                                  context: context,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  builder: (context) {
+                                    return Container(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 16,
+                                      ),
+                                      height: 200,
+                                      decoration: BoxDecoration(
+                                        color: Styles.backgroundColor,
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          SizedBox(height: 12),
+                                          Center(
+                                            child: Text(
+                                              'Ваша заявка уже принята',
+                                              style: Styles.ts18(
+                                                Styles.red,
+                                              ),
                                             ),
-                                            height: 300,
-                                            decoration: BoxDecoration(
-                                              color: Styles.backgroundColor,
+                                          ),
+                                          
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                );
+                                print('Ваша заявка уже принята');
+                              } else if (_kycStatus == 0) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => StepOneScreen(),
+                                  ),
+                                );
+                              } else if (_kycText != null) {
+                                showModalBottomSheet(
+                                  context: context,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  builder: (context) {
+                                    return Container(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 16,
+                                      ),
+                                      height: 300,
+                                      decoration: BoxDecoration(
+                                        color: Styles.backgroundColor,
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          SizedBox(height: 12),
+                                          Center(
+                                            child: Text(
+                                              'Отклон',
+                                              style: Styles.ts18(
+                                                Styles.red,
+                                              ),
                                             ),
-                                            child: Column(
-                                              children: [
-                                                SizedBox(height: 12),
-                                                Center(
-                                                  child: Text(
-                                                    'Отклон',
-                                                    style: Styles.ts18(
-                                                      Styles.red,
-                                                    ),
+                                          ),
+                                          SizedBox(height: 32),
+                                          Text(
+                                            _kycText!
+                                                .replaceAll('[', '')
+                                                .replaceAll(']', ''),
+                                            style: Styles.ts18(Styles.white),
+                                          ),
+                                          Spacer(),
+                                          Center(
+                                            child: InkWell(
+                                              onTap: () {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        StepOneScreen(),
                                                   ),
+                                                );
+                                              },
+                                              child: Text(
+                                                'Пройти идентификацию повторно',
+                                                style: Styles.ts14(
+                                                  Styles.white,
                                                 ),
-                                                SizedBox(height: 32),
-                                                Text(
-                                                  _kycText!
-                                                      .replaceAll('[', '')
-                                                      .replaceAll(']', ''),
-                                                  style:
-                                                      Styles.ts18(Styles.white),
-                                                )
-                                              ],
+                                              ),
                                             ),
-                                          );
-                                        },
-                                      );
-                                    },
+                                          ),
+                                          SizedBox(
+                                            height: 60,
+                                          )
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                );
+                              }
+                            },
+                            attentionWidget: _kycText != null
+                                ? InkWell(
                                     child: Container(
                                       padding: EdgeInsets.all(4),
                                       decoration: BoxDecoration(

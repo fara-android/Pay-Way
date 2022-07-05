@@ -120,8 +120,7 @@ class _StepThreeScreenState extends State<StepThreeScreen> {
               CustomButton(
                   text: "Далее",
                   onPressed: () {
-                    if (_registerUserModel.dataRozdeniya == null ||
-                        _registerUserModel.semeinoePolozenie == null ||
+                    if (_registerUserModel.semeinoePolozenie == null ||
                         _registerUserModel.pol == null) {
                       FocusScope.of(context).unfocus();
                       AppToasts().showBottomToast(
